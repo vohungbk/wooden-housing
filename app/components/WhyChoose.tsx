@@ -110,6 +110,13 @@ function WhyChoose() {
               height={1}
               className='hidden lg:block'
             />
+            <Image
+              src={"/images/why-choose.svg"}
+              alt=''
+              width={22}
+              height={1}
+              className='block lg:hidden'
+            />
             <div className='text-center'>
               <span className='text-[22px] font-semibold leading-[30.84px] text-[#352d39] lg:text-[32px] lg:leading-[46px]'>
                 Why Choose{" "}
@@ -124,6 +131,13 @@ function WhyChoose() {
               width={390}
               height={1}
               className='hidden lg:block'
+            />
+            <Image
+              src={"/images/why-choose.svg"}
+              alt=''
+              width={22}
+              height={1}
+              className='block lg:hidden'
             />
           </div>
           <div className='w-[282.89px] text-center text-[11px] font-light leading-[17.50px] text-[#636363] lg:mt-1.5 lg:w-[426px] lg:text-[18px]'>
