@@ -1,6 +1,15 @@
+"use client";
+
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { collection, getDocs } from "firebase/firestore";
+import { ServiceType } from "../types/services";
+import { db } from "../configs/firebase";
+import Link from "next/link";
+import { LIST_ROUTER } from "../shared/constant";
 
 interface RightSidebarProps {
   isOpen: boolean;
@@ -11,6 +20,21 @@ export const RightSidebar: FC<RightSidebarProps> = ({
   isOpen,
   toggleSidebar,
 }) => {
+  const [serviceList, setServiceList] = useState<ServiceType[]>();
+
+  useEffect(() => {
+    (async () => {
+      const postCollectionRef = collection(db, "services");
+      const postCollectionSnapshot = await getDocs(postCollectionRef);
+
+      const list = postCollectionSnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() } as ServiceType;
+      });
+
+      setServiceList(list);
+    })();
+  }, []);
+
   return (
     <motion.div
       className={`fixed right-0 top-0 w-[347px] bg-white ${isOpen && "z-30"}`}
@@ -64,95 +88,53 @@ export const RightSidebar: FC<RightSidebarProps> = ({
               </div>
             </div>
           </div>
-          <div className='flex h-[360px] flex-col items-start justify-start gap-2.5 self-stretch rounded-lg bg-[#fff1ec] p-2.5'>
+          <div className='flex flex-col items-start justify-start gap-2.5 self-stretch rounded-lg bg-[#fff1ec] p-2.5'>
             <div className='inline-flex items-center justify-start gap-2.5 self-stretch'>
               <div className='Services text-center text-sm font-medium text-[#282828]'>
                 Services
               </div>
             </div>
-            <div className='flex h-[312px] flex-col items-start justify-start gap-2.5 self-stretch'>
-              <div className='flex h-56 flex-col items-start justify-start gap-1.5 self-stretch'>
-                <div className='inline-flex items-start justify-start gap-1.5 self-stretch'>
-                  <div className='inline-flex shrink grow basis-0 flex-col items-start justify-start self-stretch rounded-[5px] shadow'>
+            <div className='flex flex-col items-start justify-start gap-2.5 self-stretch'>
+              <div className='grid grid-cols-2 gap-1.5'>
+                {serviceList?.map((item) => (
+                  <Link
+                    href={`${LIST_ROUTER.SERVICE}/${item.id}`}
+                    key={item.id}
+                    className='inline-flex shrink grow basis-0 flex-col items-start justify-start self-stretch rounded-[5px] shadow'
+                  >
                     <Image
                       className='h-[69px] self-stretch rounded-tl-[5px] rounded-tr-[5px] border border-white'
-                      src='/images/cottages.svg'
+                      src={item.img}
                       alt=''
                       width={138.5}
                       height={69}
                     />
                     <div className='inline-flex h-10 items-center justify-center gap-2.5 self-stretch rounded-[5px] bg-white py-1.5'>
-                      <div className='text-center text-[11px] font-normal text-[#191919]'>
-                        Wooden Cottages
+                      <div className='overflow-hidden text-ellipsis whitespace-nowrap text-center text-[11px] font-normal text-[#191919]'>
+                        {item.title}
                       </div>
                     </div>
-                  </div>
-                  <div className='inline-flex shrink grow basis-0 flex-col items-start justify-start rounded-[5px] shadow'>
-                    <Image
-                      className='h-[69px] self-stretch rounded-tl-[5px] rounded-tr-[5px] border border-white'
-                      src='/images/villa.svg'
-                      width={138.5}
-                      height={69}
-                      alt=''
-                    />
-                    <div className='inline-flex h-10 items-center justify-center gap-2.5 self-stretch rounded-[5px] bg-white py-1.5'>
-                      <div className='text-center text-[11px] font-normal text-[#191919]'>
-                        Wooden Villas
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='inline-flex items-start justify-start gap-1.5 self-stretch'>
-                  <div className='inline-flex shrink grow basis-0 flex-col items-start justify-start rounded-[5px] shadow'>
-                    <Image
-                      className='h-[69px] self-stretch rounded-tl-[5px] rounded-tr-[5px] border border-white'
-                      src='/images/pergola.svg'
-                      width={138.5}
-                      height={69}
-                      alt=''
-                    />
-                    <div className='inline-flex h-10 items-center justify-center gap-2.5 self-stretch rounded-[5px] bg-white py-1.5'>
-                      <div className='WoodenPergola text-center text-[11px] font-normal text-[#191919]'>
-                        Wooden Pergola
-                      </div>
-                    </div>
-                  </div>
-                  <div className='inline-flex shrink grow basis-0 flex-col items-start justify-start self-stretch rounded-[5px] shadow'>
-                    <Image
-                      className='self-stretch rounded-tl-[5px] rounded-tr-[5px] border border-white'
-                      src='/images/cottages.svg'
-                      width={138.5}
-                      height={69}
-                      alt=''
-                    />
-                    <div className='inline-flex h-10 items-center justify-center gap-2.5 self-stretch rounded-[5px] bg-white py-1.5'>
-                      <div className='text-center text-[11px] font-normal text-[#191919]'>
-                        Wooden Cottages
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  </Link>
+                ))}
               </div>
               <div className='inline-flex items-center justify-between self-stretch rounded-[5px] bg-white p-2.5 shadow'>
                 <div className='OurProjects text-center text-[11px] font-normal text-[#282828]'>
                   Our Projects
                 </div>
-                <Image
-                  src={"/icons/arrow-right.svg"}
-                  alt='Arrow'
-                  width={3}
-                  height={6}
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  color='#D75438'
+                  fontSize={6}
                 />
               </div>
               <div className='inline-flex items-center justify-between self-stretch rounded-[5px] bg-white p-2.5 shadow'>
                 <div className='text-center text-[11px] font-normal text-[#282828]'>
                   Why Wooden House?
                 </div>
-                <Image
-                  src={"/icons/arrow-right.svg"}
-                  alt='Arrow'
-                  width={3}
-                  height={6}
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  color='#D75438'
+                  fontSize={6}
                 />
               </div>
             </div>
@@ -190,12 +172,10 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                 <button className='text-[11px] font-medium text-[#6d2793]'>
                   Book now{" "}
                 </button>
-                <Image
-                  src={"/icons/arrow-right-purple.svg"}
-                  alt=''
-                  width={3}
-                  height={6}
-                  className='h-1.5'
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  color='#6D2794'
+                  fontSize={6}
                 />
               </div>
             </div>
@@ -228,15 +208,7 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                 </div>
               </div>
             </div>
-            <div className='h-1.5'>
-              <Image
-                src={"/icons/arrow-right.svg"}
-                alt='Arrow'
-                width={3}
-                height={6}
-                className='h-1.5'
-              />
-            </div>
+            <FontAwesomeIcon icon={faAngleRight} color='#D75438' fontSize={6} />
           </div>
           <div className='mb-[15px] flex h-[168px] flex-col items-start justify-start self-stretch rounded-[5px]'>
             <div className='inline-flex items-center justify-between self-stretch border-b border-[#f4d5ca] bg-[#fff1ec] p-2.5'>
@@ -253,15 +225,11 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                   Designs
                 </div>
               </div>
-              <div className='h-1.5'>
-                <Image
-                  src={"/icons/arrow-right.svg"}
-                  alt='Arrow'
-                  width={3}
-                  height={6}
-                  className='h-1.5'
-                />
-              </div>
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                color='#D75438'
+                fontSize={6}
+              />
             </div>
             <div className='inline-flex items-center justify-between self-stretch border-b border-[#f4d5ca] bg-[#fff1ec] p-2.5'>
               <div className='Frame338 flex items-center justify-start gap-[7px]'>
@@ -277,15 +245,11 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                   About
                 </div>
               </div>
-              <div className='h-1.5'>
-                <Image
-                  src={"/icons/arrow-right.svg"}
-                  alt='Arrow'
-                  width={3}
-                  height={6}
-                  className='h-1.5'
-                />
-              </div>
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                color='#D75438'
+                fontSize={6}
+              />
             </div>
             <div className='inline-flex items-center justify-between self-stretch border-b border-[#f4d5ca] bg-[#fff1ec] p-2.5'>
               <div className='flex items-center justify-start gap-[7px]'>
@@ -301,15 +265,11 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                   Career
                 </div>
               </div>
-              <div className='h-1.5'>
-                <Image
-                  src={"/icons/arrow-right.svg"}
-                  alt='Arrow'
-                  width={3}
-                  height={6}
-                  className='h-1.5'
-                />
-              </div>
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                color='#D75438'
+                fontSize={6}
+              />
             </div>
             <div className='inline-flex items-center justify-between self-stretch bg-[#fff1ec] p-2.5'>
               <div className='flex items-center justify-start gap-[7px]'>
@@ -326,12 +286,10 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                 </div>
               </div>
               <div className='h-1.5'>
-                <Image
-                  src={"/icons/arrow-right.svg"}
-                  alt='Arrow'
-                  width={3}
-                  height={6}
-                  className='h-1.5'
+                <FontAwesomeIcon
+                  icon={faAngleRight}
+                  color='#D75438'
+                  fontSize={6}
                 />
               </div>
             </div>

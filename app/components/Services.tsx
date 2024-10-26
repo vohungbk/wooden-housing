@@ -1,47 +1,37 @@
 "use client";
 
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { collection, getDocs } from "firebase/firestore";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { NavigationOptions } from "swiper/types";
-
-const ServiceData = [
-  {
-    id: 1,
-    title: "Wooden Cottages",
-    description:
-      "Cozy, handcrafted wooden cottages designed for comfort and natural charm.",
-    imageUrl: "/images/cattegoes.svg",
-  },
-  {
-    id: 2,
-    title: "Wooden Villas",
-    description:
-      "Luxurious wooden villas offering elegance and sustainability in every detail.",
-    imageUrl: "/images/cattegoes.svg",
-  },
-  {
-    id: 3,
-    title: "Wooden Cottages",
-    description:
-      "Elegant wooden pergolas, perfect for enhancing your outdoor living spaces.",
-    imageUrl: "/images/cattegoes.svg",
-  },
-  {
-    id: 4,
-    title: "Wooden Cafe",
-    description:
-      "Beautifully crafted wooden gazebos, ideal for relaxation and outdoor gatherings.",
-    imageUrl: "/images/cattegoes.svg",
-  },
-];
+import { db } from "../configs/firebase";
+import { ServiceType } from "../types/services";
+import { LIST_ROUTER } from "../shared/constant";
 
 function Services() {
+  const [serviceList, setServiceList] = useState<ServiceType[]>();
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const postCollectionRef = collection(db, "services");
+      const postCollectionSnapshot = await getDocs(postCollectionRef);
+
+      const list = postCollectionSnapshot.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() } as ServiceType;
+      });
+
+      setServiceList(list);
+    })();
+  }, []);
 
   useEffect(() => {
     if (swiper && swiper.params.navigation && swiper.navigation) {
@@ -139,41 +129,47 @@ function Services() {
         </div>
       </div>
       <div className='mt-[28px] grid w-full grid-cols-2 flex-wrap justify-between gap-[14px] lg:hidden'>
-        {ServiceData.map((item) => (
+        {serviceList?.map((item, index) => (
           <div
             key={item.id}
-            className='inline-flex h-[287.77px] w-full flex-col items-start justify-start overflow-hidden rounded-[9.84px] shadow'
+            className='inline-flex w-full flex-col items-start justify-start overflow-hidden rounded-[9.84px] shadow'
           >
-            <Image
-              alt=''
-              className='h-[137.77px] self-stretch'
-              src='/images/cattegoes.svg'
-              width={183}
-              height={137}
-            />
+            <div className='relative h-full w-full pt-[100%]'>
+              <Image
+                src={item.img}
+                alt={item.title}
+                layout='fill'
+                objectFit='cover'
+                priority={index < 2}
+                loading={index >= 2 ? "lazy" : "eager"}
+                quality={75}
+              />
+            </div>
             <div className='flex h-[150px] flex-col items-center justify-center gap-[15px] self-stretch bg-white px-2.5 py-[15px]'>
               <div className='flex h-[74px] flex-col items-center justify-start self-stretch'>
-                <div className='text-sm font-medium leading-snug text-[#222222]'>
+                <h4 className='w-[132px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium leading-snug text-[#222222]'>
                   {item.title}
-                </div>
-                <div className='self-stretch text-center text-[11px] font-light leading-[17.50px] text-[#6f6f6f]'>
+                </h4>
+                <p className='line-clamp-3 w-[135px] self-stretch overflow-hidden text-ellipsis text-center text-[11px] font-light leading-[17.50px] text-[#6f6f6f]'>
                   {item.description}
                   <br />
-                </div>
+                </p>
               </div>
-              <div className='inline-flex h-[28.99px] w-[82.63px] items-center justify-between rounded-[26.09px] border border-[#c7c7c7] py-[2.90px] pl-[8.70px] pr-[3.62px]'>
+              <Link
+                href={`${LIST_ROUTER.SERVICE}/${item.id}`}
+                className='inline-flex h-[28.99px] w-[82.63px] items-center justify-between rounded-[26.09px] border border-[#c7c7c7] py-[2.90px] pl-[8.70px] pr-[3.62px]'
+              >
                 <div className='w-[41.32px] text-center text-[13.05px] font-normal leading-[18.12px] text-[#222222]'>
                   View
                 </div>
                 <div className='flex h-[19.57px] w-[19.57px] items-center justify-center gap-[4.89px] rounded-[19.08px] bg-[#d75337]'>
-                  <Image
-                    alt=''
-                    src={"/icons/arrow-right-white.svg"}
-                    width={3}
-                    height={5}
+                  <FontAwesomeIcon
+                    icon={faAngleRight}
+                    color='#ffffff'
+                    fontSize={7}
                   />
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         ))}
@@ -181,13 +177,7 @@ function Services() {
       <div className='mt-[47px] hidden w-full justify-center lg:flex'>
         <div className='relative w-[70%]'>
           <div className='swiper-button -left-[30px] z-10' ref={prevRef}>
-            <Image
-              src={"/icons/swiper-left.svg"}
-              alt='swiper left'
-              width={8}
-              height={17}
-              className=''
-            />
+            <FontAwesomeIcon icon={faAngleLeft} color='#363636' fontSize={16} />
           </div>
           <Swiper
             modules={[Navigation, Pagination]}
@@ -201,7 +191,7 @@ function Services() {
             }}
             onSwiper={setSwiper}
           >
-            {ServiceData.map((item) => (
+            {serviceList?.map((item) => (
               <SwiperSlide
                 key={item.id}
                 className='!h-[422px] !w-[400px] !items-start rounded-[15px]'
@@ -209,10 +199,10 @@ function Services() {
                 <div className='w-[400px] rounded-[15px]'>
                   <div
                     className='h-[210px] w-full overflow-hidden rounded-[15px] rounded-b-none bg-cover bg-no-repeat'
-                    style={{ backgroundImage: `url(${item.imageUrl})` }}
+                    style={{ backgroundImage: `url(${item.img})` }}
                   />
                   <div className='w-full bg-white p-5'>
-                    <h4 className='mb-[5px] text-center text-[22px] font-medium text-[#222222]'>
+                    <h4 className='mb-[5px] text-center text-[22px] font-medium leading-5 text-[#222222]'>
                       {item.title}
                     </h4>
                     <div className='mb-[25px] flex w-full justify-center'>
@@ -220,33 +210,31 @@ function Services() {
                         {item.description}
                       </h4>
                     </div>
-                    <div className='inline-flex h-[44px] w-[125px] items-center justify-between rounded-[39px] border border-[#c8c8c8] py-[8px] pl-[13px] pr-[3.62px]'>
+                    <Link
+                      href={`${LIST_ROUTER.SERVICE}/${item.id}`}
+                      className='inline-flex h-[44px] w-[125px] items-center justify-between rounded-[39px] border border-[#c8c8c8] py-[8px] pl-[13px] pr-[3.62px] hover:opacity-90'
+                    >
                       <div className='w-[62px] text-center text-[19px] font-normal leading-[18.12px] text-[#222222]'>
                         View
                       </div>
                       <div className='flex h-[30px] w-[30px] items-center justify-center rounded-[28px] bg-[#d75337]'>
-                        <div className='h-[7px] w-[3px]'>
-                          <Image
-                            alt=''
-                            src={"/icons/arrow-right-white.svg"}
-                            width={3}
-                            height={7}
-                          />
-                        </div>
+                        <FontAwesomeIcon
+                          icon={faAngleRight}
+                          color='#ffffff'
+                          fontSize={7}
+                        />
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
           <div className='swiper-button -right-[30px] z-10' ref={nextRef}>
-            <Image
-              src={"/icons/swiper-right.svg"}
-              alt='swiper left'
-              width={8}
-              height={17}
-              className=''
+            <FontAwesomeIcon
+              icon={faAngleRight}
+              color='#363636'
+              fontSize={16}
             />
           </div>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 
 function ConstructionDetails() {
   return (
-    <section className='hidden justify-center pt-[53px] lg:flex'>
+    <section className='hidden justify-center pt-[53px] xl:flex'>
       <div className='flex flex-col gap-[53px] lg:w-[1000px] xl:w-[1250px] 2xl:w-[1280px]'>
         <div className='inline-flex h-20 flex-col items-center justify-start gap-1.5'>
           <div className='inline-flex items-center justify-center gap-[5px] self-stretch'>

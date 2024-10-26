@@ -85,3 +85,7 @@ body {
   background-color: #352e39;
   border-radius: 15px;
 }
+
+.swiper-button-disabled {
+  display: none;
+}

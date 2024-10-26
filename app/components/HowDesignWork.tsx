@@ -11,7 +11,7 @@ function HowDesignWork() {
             alt=''
             width={378}
             height={1}
-            className='hidden lg:block'
+            className='hidden xl:block'
           />
           <div className='text-center text-[22px] font-semibold leading-[30.84px] text-[#352d39] lg:text-[28px]'>
             How design session works?
@@ -21,14 +21,14 @@ function HowDesignWork() {
             alt=''
             width={378}
             height={1}
-            className='hidden lg:block'
+            className='hidden xl:block'
           />
         </div>
         <div className='text-center text-[11px] font-light leading-[27px] text-[#636363] lg:text-[18px]'>
           Take a look at our work process below!
         </div>
       </div>
-      <div className='flex justify-center lg:hidden'>
+      <div className='flex justify-center xl:hidden'>
         <div className='relative h-[1085px] w-[291px]'>
           <div className='absolute left-0 top-[51.98px] z-10 flex h-[44.55px] w-[44.55px] items-center justify-center rounded-full bg-[#d75337]'>
             <div className='text-[21.78px] font-medium leading-7 text-white'>
@@ -130,8 +130,8 @@ function HowDesignWork() {
           </div>
         </div>
       </div>
-      <div className='hidden justify-center lg:flex'>
-        <div className='relative flex lg:w-[1000px] lg:gap-5 xl:w-[1200px] xl:gap-[49px] 2xl:w-[1280px]'>
+      <div className='hidden justify-center xl:flex'>
+        <div className='relative flex lg:w-[1010px] lg:gap-5 xl:w-[1200px] xl:gap-[49px] 2xl:w-[1280px]'>
           <div className='flex flex-col gap-[68px]'>
             <div className='h-[193px] w-[237px]'>
               <Image

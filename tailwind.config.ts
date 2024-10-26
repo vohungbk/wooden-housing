@@ -11,6 +11,7 @@ const config: Config = {
       colors: {},
       boxShadow: {
         header: "0px 4px 8.8px 0px #6D97BA12",
+        dropdownMenu: "0px 4px 32.3px 0px #0000001A",
       },
       fontFamily: {
         livvic: "var(--font-livvic)",
@@ -37,7 +38,6 @@ const config: Config = {
           from: { transform: "translateX(-100%)" },
           to: { transform: "translateX(0)" },
         },
-        // Scroll from right to left
         "infinite-scroll-right": {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },

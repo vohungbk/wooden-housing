@@ -51,12 +51,12 @@ function Technologies() {
               alt=''
               width={60}
               height={1}
-              className='block lg:hidden'
+              className='block xl:hidden'
             />
             <Image
               src={"/images/tech-line-desktop.svg"}
               alt=''
-              className='hidden lg:block'
+              className='hidden xl:block'
               width={445}
               height={1}
             />
@@ -64,7 +64,7 @@ function Technologies() {
               What’s our approach?
             </div>
             <Image
-              className='block lg:hidden'
+              className='block xl:hidden'
               src={"/images/tech-line.svg"}
               alt=''
               width={60}
@@ -73,7 +73,7 @@ function Technologies() {
             <Image
               src={"/images/tech-line-desktop.svg"}
               alt=''
-              className='hidden lg:block'
+              className='hidden xl:block'
               width={445}
               height={1}
             />

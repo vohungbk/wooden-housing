@@ -57,14 +57,14 @@ function WhyChoosePrefabricated() {
               alt='Unique'
               width={55}
               height={1}
-              className='block lg:hidden'
+              className='block xl:hidden'
             />
             <Image
               src={"/images/why-choose-pre-desktop.svg"}
               alt='Why choose'
               width={279}
               height={1}
-              className='hidden lg:block'
+              className='hidden xl:block'
             />
             <div className='text-center text-xl font-semibold leading-[25px] text-[#352d39] lg:text-[28px]'>
               Why Choose Prefabricated Wooden Houses?
@@ -74,14 +74,14 @@ function WhyChoosePrefabricated() {
               alt='Unique'
               width={55}
               height={1}
-              className='block lg:hidden'
+              className='block xl:hidden'
             />
             <Image
               src={"/images/why-choose-pre-desktop.svg"}
               alt='Why choose'
               width={279}
               height={1}
-              className='hidden lg:block'
+              className='hidden xl:block'
             />
           </div>
           <div className='text-center text-[11px] font-light leading-[27px] text-[#636463] lg:hidden'>

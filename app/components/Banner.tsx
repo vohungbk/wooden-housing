@@ -62,16 +62,17 @@ function Banner() {
             </button>
           </div>
         </div>
-        <div className='absolute -bottom-[25px] left-0 z-10 h-[50px] w-full origin-bottom rotate-2 bg-white'></div>
+        <div className='absolute -bottom-[25px] -left-[1px] z-10 h-[50px] w-full origin-bottom rotate-2 bg-white lg:left-0'></div>
         <Image
           src={"/images/banner-image.svg"}
           alt='Banner'
           width={521}
           height={379}
-          className='block lg:hidden'
+          className='block xl:hidden'
+          objectFit='cover'
         />
         <Image
-          className='!left-auto hidden lg:block lg:!h-[480px] lg:!w-[900px] 2xl:!h-[586px] 2xl:!w-[1100px]'
+          className='!left-auto hidden lg:!h-[480px] lg:!w-[900px] xl:block 2xl:!h-[586px] 2xl:!w-[1100px]'
           src={"/images/banner-desktop.svg"}
           alt='Banner'
           objectFit='cover'

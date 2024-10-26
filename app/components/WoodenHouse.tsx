@@ -1,4 +1,5 @@
-import React from "react";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
@@ -51,12 +52,10 @@ function WoodenHouse() {
               className='swiper-button -left-[30px] z-10 !hidden lg:!flex'
               ref={prevRef}
             >
-              <Image
-                src={"/icons/swiper-left.svg"}
-                alt='swiper left'
-                width={8}
-                height={17}
-                className=''
+              <FontAwesomeIcon
+                icon={faAngleLeft}
+                color='#363636'
+                fontSize={16}
               />
             </div>
             <Swiper
@@ -130,12 +129,10 @@ function WoodenHouse() {
               className='swiper-button -right-[30px] z-10 !hidden lg:!flex'
               ref={nextRef}
             >
-              <Image
-                src={"/icons/swiper-right.svg"}
-                alt='swiper left'
-                width={8}
-                height={17}
-                className=''
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                color='#363636'
+                fontSize={16}
               />
             </div>
           </div>
