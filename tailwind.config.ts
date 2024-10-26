@@ -33,13 +33,19 @@ const config: Config = {
         bannerDesktop: "url('/images/banner-desktop.svg')",
       },
       keyframes: {
-        "infinite-scroll": {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(calc(-50% - 20px))" },
+        "infinite-scroll-left": {
+          from: { transform: "translateX(-100%)" },
+          to: { transform: "translateX(0)" },
+        },
+        // Scroll from right to left
+        "infinite-scroll-right": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
         },
       },
       animation: {
-        "infinite-scroll": "infinite-scroll 20s linear infinite",
+        "infinite-scroll-left": "infinite-scroll-left 25s linear infinite",
+        "infinite-scroll-right": "infinite-scroll-right 25s linear infinite",
       },
     },
   },
