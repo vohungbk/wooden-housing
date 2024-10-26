@@ -3,7 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCi48T1kkmkv-pPvqNd-K9uKGc-u5QAZrQ",
+  apiKey: process.env.NEXT_PUBLIC_FISEBASE_API_KEY,
   authDomain: "woodenhousing-48e9b.firebaseapp.com",
   projectId: "woodenhousing-48e9b",
   storageBucket: "woodenhousing-48e9b.appspot.com",
