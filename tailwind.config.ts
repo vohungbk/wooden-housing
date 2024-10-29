@@ -9,6 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {},
+      screens: {
+        "375": "375px",
+        "430": "430px",
+      },
       boxShadow: {
         header: "0px 4px 8.8px 0px #6D97BA12",
         dropdownMenu: "0px 4px 32.3px 0px #0000001A",
@@ -42,13 +46,19 @@ const config: Config = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },
         },
+        ring: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.2)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
       animation: {
         "infinite-scroll-left": "infinite-scroll-left 25s linear infinite",
         "infinite-scroll-right": "infinite-scroll-right 25s linear infinite",
+        ring: "ring 1s infinite",
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
 export default config;

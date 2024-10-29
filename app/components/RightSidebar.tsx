@@ -1,15 +1,15 @@
 "use client";
 
-import Image from "next/image";
-import React, { FC, useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { collection, getDocs } from "firebase/firestore";
-import { ServiceType } from "../types/services";
-import { db } from "../configs/firebase";
+import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
+import { FC, useEffect, useState } from "react";
+import { db } from "../configs/firebase";
 import { LIST_ROUTER } from "../shared/constant";
+import { CategoryType } from "../types/services";
 
 interface RightSidebarProps {
   isOpen: boolean;
@@ -20,20 +20,22 @@ export const RightSidebar: FC<RightSidebarProps> = ({
   isOpen,
   toggleSidebar,
 }) => {
-  const [serviceList, setServiceList] = useState<ServiceType[]>();
+  const [categoryList, setCategoryList] = useState<CategoryType[]>();
 
   useEffect(() => {
     (async () => {
-      const postCollectionRef = collection(db, "services");
+      const postCollectionRef = collection(db, "serviceCategories");
       const postCollectionSnapshot = await getDocs(postCollectionRef);
 
       const list = postCollectionSnapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() } as ServiceType;
+        return { id: doc.id, ...doc.data() } as CategoryType;
       });
 
-      setServiceList(list);
+      setCategoryList(list);
     })();
   }, []);
+
+  const handleClickLink = () => toggleSidebar;
 
   return (
     <motion.div
@@ -59,7 +61,11 @@ export const RightSidebar: FC<RightSidebarProps> = ({
         </div>
         <div className='flex flex-col items-end justify-start gap-2.5 self-stretch'>
           <div className='relative h-[81px] w-[302px]'>
-            <div className='absolute left-0 top-0 inline-flex h-[81px] w-[94px] flex-col items-center justify-center gap-2.5 rounded-lg bg-[#fff1ec] px-[23.50px] py-[15px]'>
+            <Link
+              onClick={handleClickLink}
+              href={"/"}
+              className='absolute left-0 top-0 inline-flex h-[81px] w-[94px] flex-col items-center justify-center gap-2.5 rounded-lg bg-[#fff1ec] px-[23.50px] py-[15px]'
+            >
               <Image
                 src={"/icons/home.svg"}
                 alt='Home'
@@ -69,7 +75,7 @@ export const RightSidebar: FC<RightSidebarProps> = ({
               <div className='Home w-[47px] text-center text-[11px] text-[#282828]'>
                 Home
               </div>
-            </div>
+            </Link>
             <div className='absolute left-[104px] top-0 inline-flex h-[81px] w-[94px] flex-col items-center justify-center gap-2.5 rounded-lg bg-[#fff1ec] px-3.5 py-[15px]'>
               <Image
                 src={"/icons/contact.svg"}
@@ -96,7 +102,7 @@ export const RightSidebar: FC<RightSidebarProps> = ({
             </div>
             <div className='flex flex-col items-start justify-start gap-2.5 self-stretch'>
               <div className='grid grid-cols-2 gap-1.5'>
-                {serviceList?.map((item) => (
+                {categoryList?.map((item) => (
                   <Link
                     href={`${LIST_ROUTER.SERVICE}/${item.id}`}
                     key={item.id}
@@ -104,14 +110,14 @@ export const RightSidebar: FC<RightSidebarProps> = ({
                   >
                     <Image
                       className='h-[69px] self-stretch rounded-tl-[5px] rounded-tr-[5px] border border-white'
-                      src={item.img}
+                      src={item?.coverImage}
                       alt=''
                       width={138.5}
                       height={69}
                     />
                     <div className='inline-flex h-10 items-center justify-center gap-2.5 self-stretch rounded-[5px] bg-white py-1.5'>
                       <div className='overflow-hidden text-ellipsis whitespace-nowrap text-center text-[11px] font-normal text-[#191919]'>
-                        {item.title}
+                        {item?.name}
                       </div>
                     </div>
                   </Link>

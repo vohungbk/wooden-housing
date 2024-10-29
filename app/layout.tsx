@@ -3,6 +3,7 @@ import "react-phone-input-2/lib/style.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "react-responsive-modal/styles.css";
 import "./globals.css";
 import { Lexend_Deca, Livvic, Oregano, Libre_Franklin } from "next/font/google";
 import Header from "./components/layouts/Header";

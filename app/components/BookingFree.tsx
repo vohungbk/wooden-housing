@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
+import { ToggleSwitch } from "./FormComponents/ToggleSwitch";
 
 function BookingFree() {
   const [phoneValue, setPhoneValue] = useState("");
@@ -75,11 +76,8 @@ function BookingFree() {
                   />
                 </div>
               </div>
-              <div className='inline-flex items-center justify-start gap-[8.23px]'>
-                <div className='relative h-[11.52px] w-[23.04px]'>
-                  <div className='absolute left-0 top-0 h-[11.52px] w-[23.04px] rounded-[19.20px] bg-[#d75337]' />
-                  <div className='absolute left-[11.52px] top-0 h-[11.52px] w-[11.52px] rounded-full border-2 border-[#d75337] bg-white' />
-                </div>
+              <div className='inline-flex items-center justify-start gap-[8.23px] xl:mt-2.5'>
+                <ToggleSwitch />
                 <div className='text-sm font-normal leading-[18.93px] text-[#474747]'>
                   Reach me on whatsapp
                 </div>
@@ -99,7 +97,7 @@ function BookingFree() {
         </div>
       </div>
       <div className='absolute -top-[124px] left-[78px] z-0 block h-[412px] w-[437px] bg-booking bg-center bg-no-repeat xl:hidden' />
-      <div className='bg-bookingDesktop absolute -bottom-[170px] -left-[99px] z-0 hidden h-[859px] w-[910px] bg-center bg-no-repeat xl:block' />
+      <div className='absolute -bottom-[170px] -left-[99px] z-0 hidden h-[859px] w-[910px] bg-bookingDesktop bg-center bg-no-repeat xl:block' />
     </section>
   );
 }

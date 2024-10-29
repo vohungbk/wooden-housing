@@ -11,25 +11,25 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { NavigationOptions } from "swiper/types";
 import { db } from "../configs/firebase";
-import { ServiceType } from "../types/services";
 import { LIST_ROUTER } from "../shared/constant";
+import { CategoryType } from "../types/services";
 
 function Services() {
-  const [serviceList, setServiceList] = useState<ServiceType[]>();
+  const [categoryList, setCategoryList] = useState<CategoryType[]>();
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     (async () => {
-      const postCollectionRef = collection(db, "services");
+      const postCollectionRef = collection(db, "serviceCategories");
       const postCollectionSnapshot = await getDocs(postCollectionRef);
 
       const list = postCollectionSnapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() } as ServiceType;
+        return { id: doc.id, ...doc.data() } as CategoryType;
       });
 
-      setServiceList(list);
+      setCategoryList(list);
     })();
   }, []);
 
@@ -129,15 +129,15 @@ function Services() {
         </div>
       </div>
       <div className='mt-[28px] grid w-full grid-cols-2 flex-wrap justify-between gap-[14px] lg:hidden'>
-        {serviceList?.map((item, index) => (
+        {categoryList?.map((item, index) => (
           <div
             key={item.id}
             className='inline-flex w-full flex-col items-start justify-start overflow-hidden rounded-[9.84px] shadow'
           >
             <div className='relative h-full w-full pt-[100%]'>
               <Image
-                src={item.img}
-                alt={item.title}
+                src={item.coverImage}
+                alt={item.name}
                 layout='fill'
                 objectFit='cover'
                 priority={index < 2}
@@ -148,7 +148,7 @@ function Services() {
             <div className='flex h-[150px] flex-col items-center justify-center gap-[15px] self-stretch bg-white px-2.5 py-[15px]'>
               <div className='flex h-[74px] flex-col items-center justify-start self-stretch'>
                 <h4 className='w-[132px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium leading-snug text-[#222222]'>
-                  {item.title}
+                  {item.name}
                 </h4>
                 <p className='line-clamp-3 w-[135px] self-stretch overflow-hidden text-ellipsis text-center text-[11px] font-light leading-[17.50px] text-[#6f6f6f]'>
                   {item.description}
@@ -191,7 +191,7 @@ function Services() {
             }}
             onSwiper={setSwiper}
           >
-            {serviceList?.map((item) => (
+            {categoryList?.map((item) => (
               <SwiperSlide
                 key={item.id}
                 className='!h-[422px] !w-[400px] !items-start rounded-[15px]'
@@ -199,11 +199,11 @@ function Services() {
                 <div className='w-[400px] rounded-[15px]'>
                   <div
                     className='h-[210px] w-full overflow-hidden rounded-[15px] rounded-b-none bg-cover bg-no-repeat'
-                    style={{ backgroundImage: `url(${item.img})` }}
+                    style={{ backgroundImage: `url(${item.coverImage})` }}
                   />
                   <div className='w-full bg-white p-5'>
                     <h4 className='mb-[5px] text-center text-[22px] font-medium leading-5 text-[#222222]'>
-                      {item.title}
+                      {item.name}
                     </h4>
                     <div className='mb-[25px] flex w-full justify-center'>
                       <h4 className='w-[318px] text-base font-light text-[#707070]'>
@@ -221,7 +221,7 @@ function Services() {
                         <FontAwesomeIcon
                           icon={faAngleRight}
                           color='#ffffff'
-                          fontSize={7}
+                          fontSize={10}
                         />
                       </div>
                     </Link>

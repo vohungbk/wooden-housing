@@ -9,7 +9,7 @@ function LetStart() {
         background: "linear-gradient(360deg, #7CBFDE 0%, #FFFFFF 100%)",
       }}
     >
-      <div className='lg:bg-startDesktop flex h-[258px] w-full flex-col items-center justify-center bg-start bg-center bg-no-repeat lg:h-[470px]'>
+      <div className='flex h-[258px] w-full flex-col items-center justify-center bg-start bg-center bg-no-repeat lg:h-[470px] lg:bg-startDesktop'>
         <h4 className='mb-1 bg-start-text bg-clip-text bg-center text-center text-[32px] font-bold leading-10 text-[#352E39] lg:text-[60px] lg:leading-[75px] lg:text-[#F3A97442]'>
           Let’s Start Today!
         </h4>

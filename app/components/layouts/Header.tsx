@@ -1,17 +1,17 @@
 "use client";
 
-import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
-import { RightSidebar } from "../RightSidebar";
-import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
 import { db } from "@/app/configs/firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { ServiceType } from "@/app/types/services";
 import { LIST_ROUTER } from "@/app/shared/constant";
+import { CategoryType } from "@/app/types/services";
+import { collection, getDocs } from "firebase/firestore";
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { RightSidebar } from "../RightSidebar";
 
 function Header() {
-  const [serviceList, setServiceList] = useState<ServiceType[]>();
+  const [categoryList, setCategoryList] = useState<CategoryType[]>();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDrown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -41,14 +41,14 @@ function Header() {
 
   useEffect(() => {
     (async () => {
-      const postCollectionRef = collection(db, "services");
+      const postCollectionRef = collection(db, "serviceCategories");
       const postCollectionSnapshot = await getDocs(postCollectionRef);
 
       const list = postCollectionSnapshot.docs.map((doc) => {
-        return { id: doc.id, ...doc.data() } as ServiceType;
+        return { id: doc.id, ...doc.data() } as CategoryType;
       });
 
-      setServiceList(list);
+      setCategoryList(list);
     })();
   }, []);
 
@@ -68,18 +68,21 @@ function Header() {
     <>
       <header className='flex w-full justify-center bg-white py-5 pl-[26px] pr-[25px] shadow-header xl:flex-col xl:pb-0'>
         <div className='flex w-full items-center justify-between xl:mb-5'>
-          <div className='flex shrink-0 items-center gap-[9px]'>
+          <Link href={"/"} className='flex shrink-0 items-center gap-[9px]'>
             <Image src='/images/logo.png' alt='Logo' width={33} height={32} />
             <div className='font-livvic text-[16px] font-black text-[#3A2D41] xl:text-[21px] xl:leading-[27px]'>
               WOODEN
               <br className='block xl:hidden' />
               HOUSING
             </div>
-          </div>
+          </Link>
           <div className='ml-[144px] hidden gap-[38px] xl:flex'>
-            <div className='inline-flex cursor-pointer items-center justify-center gap-2.5 border-b-2 border-[#d75438]'>
-              <div className='text-lg font-medium text-[#1e1e21]'>Home</div>
-            </div>
+            <Link
+              href={"/"}
+              className='inline-flex cursor-pointer items-center justify-center gap-2.5 border-b-2 border-[#d75438]'
+            >
+              <p className='text-lg font-medium text-[#1e1e21]'>Home</p>
+            </Link>
             <div className='inline-flex cursor-pointer items-center justify-start gap-[7px]'>
               <div className='text-lg font-normal text-[#1e1e21]'>Designs</div>
             </div>
@@ -105,15 +108,16 @@ function Header() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     transition={{ duration: 0.3 }}
-                    className='shadow-dropdownMenu absolute top-[30px] z-20 h-[190px] w-[247px] overflow-y-auto rounded-[10px] bg-white px-[17px] pb-5 pt-2.5 text-[#1B1B1B]'
+                    className='absolute top-[30px] z-20 h-[190px] w-[247px] overflow-y-auto rounded-[10px] bg-white px-[17px] pb-5 pt-2.5 text-[#1B1B1B] shadow-dropdownMenu'
                   >
-                    {serviceList?.map((item) => (
+                    {categoryList?.map((item) => (
                       <Link
+                        onClick={() => setIsOpenDropdown(false)}
                         key={item.id}
                         href={`${LIST_ROUTER.SERVICE}/${item.id}`}
                         className='block cursor-pointer rounded-md pl-2 leading-10 hover:bg-gray-200'
                       >
-                        {item.title}
+                        {item.name}
                       </Link>
                     ))}
                   </motion.div>

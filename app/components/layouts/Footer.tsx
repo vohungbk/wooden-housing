@@ -4,7 +4,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <section>
+    <section className='z-10'>
       <div className='block h-full w-full bg-[#4B325A] px-[25px] pb-[33px] pt-[28px] lg:hidden'>
         <div className='mb-[25px] inline-flex w-full items-start justify-between'>
           <div className='inline-flex flex-1 flex-col items-start justify-start gap-5'>
