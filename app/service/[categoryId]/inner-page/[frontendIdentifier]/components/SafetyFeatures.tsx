@@ -16,7 +16,7 @@ function SafetyFeatures() {
           key={item.id}
           className='flex flex-col items-center gap-[11px] xl:gap-4'
         >
-          <div className='flex h-[46.64px] w-[46.64px] items-center justify-center rounded-[31.87px] border border-[#d75337] bg-white xl:h-[81px] xl:w-[81px] xl:rounded-[55px]'>
+          <div className='flex h-[46.64px] w-[46.64px] items-center justify-center rounded-[31.87px] border border-[#d75337] bg-white bg-[1.39px] xl:h-[81px] xl:w-[81px] xl:rounded-[55px] xl:border-[2.41px]'>
             <div className='inline-flex h-[35.59px] w-[35.59px] flex-col items-center justify-center rounded-[17.79px] bg-[#fff0eb] xl:h-[61.8px] xl:w-[61.8px] xl:rounded-[31.9px]'>
               <Image
                 src={item.iconUrl}

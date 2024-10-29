@@ -62,17 +62,17 @@ export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
       washArea: "Wash Area",
       area: "",
       floorElevation: "",
-      bathroomLaundryRoom: "",
+      bathroomLaundryRoom: "Bathroom/Laundry Room",
       miniBar: "Mini Bar",
-      technicalRoom: "",
-      livingRoom: "",
+      technicalRoom: "Technical Room",
+      livingRoom: "Living Room",
       floorElevationName: "",
       description: "",
       floorPlanName: "",
-      storageRoom: "",
+      storageRoom: "Storage Room",
       luggageRack: "Luggage Rack",
       floorPlan: "",
-      openArea: "",
+      openArea: "Open Area",
     };
 
     for (const [key, text] of Object.entries(itemsMap) as [
@@ -146,7 +146,7 @@ export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
             {floorData?.map((item, index) => (
               <div key={index.toString()} className='w-full'>
                 <div
-                  className={`mb-[95px] hidden w-full gap-12 xl:flex ${index % 2 === 0 ? "flex-row-reverse" : "flex-row"}`}
+                  className={`mb-[95px] hidden w-full gap-12 xl:mb-0 xl:flex xl:items-center ${index % 2 === 0 ? "flex-row-reverse" : "flex-row"}`}
                 >
                   <FloorInfo floor={item} index={index} />
                   <div className='relative h-[470px] w-full'>

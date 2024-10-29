@@ -55,7 +55,7 @@ const config: Config = {
       animation: {
         "infinite-scroll-left": "infinite-scroll-left 25s linear infinite",
         "infinite-scroll-right": "infinite-scroll-right 25s linear infinite",
-        ring: "ring 1s infinite",
+        ring: "ring 2s infinite",
       },
     },
   },

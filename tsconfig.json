@@ -29,7 +29,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "next.config.mis",
-    "app/service/[categoryId]/inner-page/[id]/components/ModalViewImage.tsx"
+    "app/service/[categoryId]/inner-page/[frontendIdentifier]/components/ModalViewImage.tsx"
   ],
   "exclude": ["node_modules"]
 }

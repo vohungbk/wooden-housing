@@ -63,6 +63,7 @@ type ServiceType = {
   projectDetails: IProjectDetailsType;
   video: string;
   models3d: string;
+  frontendIdentifier: string;
 };
 
 type CategoryType = {

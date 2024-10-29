@@ -9,6 +9,7 @@ interface InnerBannerProps {
   categoryId: string;
   serviceName: string;
   bannerImage: string;
+  description: string;
 }
 
 export const InnerBanner: FC<InnerBannerProps> = ({
@@ -16,10 +17,11 @@ export const InnerBanner: FC<InnerBannerProps> = ({
   categoryId,
   serviceName,
   bannerImage,
+  description,
 }) => {
   return (
     <div
-      className='relative h-full w-full bg-cover bg-no-repeat pb-[90px] xl:h-[550px] 2xl:h-[636px]'
+      className='relative h-full w-full bg-cover bg-no-repeat pb-[90px] xl:min-h-[636px]'
       style={{ backgroundImage: `url('${bannerImage}')` }}
     >
       <div className='absolute inset-0 bg-black bg-opacity-60'></div>
@@ -55,11 +57,11 @@ export const InnerBanner: FC<InnerBannerProps> = ({
         </div>
         <div className='items-center pl-[24px] xl:ml-[320px] xl:flex xl:h-full xl:pl-0'>
           <div className='border-l-[4px] border-l-[#ffffff] pl-[14px]'>
-            <div className='text-[26.26px] font-semibold leading-6 text-white'>
+            <div className='text-[26.26px] font-semibold leading-6 text-white xl:text-[42px] xl:leading-[52px]'>
               {serviceName}
             </div>
-            <div className='text-xl font-semibold leading-6 text-[#ff6747]'>
-              {categoryName}
+            <div className='text-xl font-semibold leading-6 text-[#ff6747] xl:text-[32px] xl:leading-[40px]'>
+              {description}
             </div>
           </div>
         </div>

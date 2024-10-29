@@ -3,7 +3,7 @@ import { LIST_ROUTER } from "@/app/shared/constant";
 import { CategoryType, ServiceType } from "@/app/types/services";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Link from "next/link";
 import Consultation from "./components/Consultation";
 import HowItWorks from "./components/HowItWorks";
@@ -13,18 +13,25 @@ import SafetyFeatures from "./components/SafetyFeatures";
 import { FloorPlan } from "./components/FloorPlan";
 import { View3D } from "./components/View3D";
 
-async function ServiceInnerPage({ params: { id = "", categoryId = "" } }) {
+async function ServiceInnerPage({
+  params: { frontendIdentifier = "", categoryId = "" },
+}) {
   let serviceDetail = null;
   let categoryDetail = null;
 
-  const docRef = doc(db, "services", id);
-  const docCategoryRef = doc(db, "serviceCategories", categoryId);
-  const docSnap = await getDoc(docRef);
-  const docCategorySnap = await getDoc(docCategoryRef);
+  const postCollectionRef = collection(db, "services");
+  const postCollectionSnapshot = await getDocs(postCollectionRef);
 
-  if (docSnap.exists()) {
-    serviceDetail = { id: docSnap.id, ...docSnap.data() } as ServiceType;
-  }
+  const list = postCollectionSnapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() } as ServiceType;
+  });
+
+  serviceDetail = list?.find(
+    (item) => item.frontendIdentifier === decodeURIComponent(frontendIdentifier)
+  );
+
+  const docCategoryRef = doc(db, "serviceCategories", categoryId);
+  const docCategorySnap = await getDoc(docCategoryRef);
 
   if (docCategorySnap.exists()) {
     categoryDetail = {
@@ -40,6 +47,7 @@ async function ServiceInnerPage({ params: { id = "", categoryId = "" } }) {
         categoryName={String(categoryDetail?.name)}
         serviceName={String(serviceDetail?.title)}
         bannerImage={String(serviceDetail?.img)}
+        description={serviceDetail?.description!}
       />
       <div className='items-center justify-center pl-[27px] pr-[25px] xl:flex'>
         <div className='w-full max-w-full xl:max-w-[1280px]'>
@@ -66,6 +74,7 @@ async function ServiceInnerPage({ params: { id = "", categoryId = "" } }) {
           <ProjectDetails
             projectDetails={serviceDetail?.projectDetails!}
             gallery={serviceDetail?.gallery!}
+            mainImage={String(serviceDetail?.img)}
           />
           <FloorPlan floorData={serviceDetail?.projectDetails?.floors!} />
         </div>
@@ -74,10 +83,14 @@ async function ServiceInnerPage({ params: { id = "", categoryId = "" } }) {
         gallery3d={serviceDetail?.gallery3d!}
         link3D={serviceDetail?.models3d?.[0]!}
       />
-      {/* 3D Video */}
       <div className='flex-center mb-8 mt-[30px] h-[242px] w-full xl:mb-[55px] xl:mt-[98px] xl:h-[828px]'>
-        <div className='h-full w-full xl:max-w-[1280px]'>
-          <video autoPlay muted loop className='h-full w-full object-cover'>
+        <div className='h-full w-full rounded-[7px] xl:max-w-[1280px]'>
+          <video
+            autoPlay
+            muted
+            loop
+            className='h-full w-full rounded-[7px] object-cover'
+          >
             <source src={serviceDetail?.video} type='video/mp4' />
           </video>
         </div>

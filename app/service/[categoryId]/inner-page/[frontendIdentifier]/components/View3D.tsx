@@ -15,7 +15,7 @@ interface View3DProps {
   link3D: string;
 }
 
-export const View3D: FC<View3DProps> = ({ gallery3d, link3D }) => {
+export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
   const [openModal, setOpenModal] = useState(false);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const prevRef = useRef<HTMLDivElement | null>(null);
