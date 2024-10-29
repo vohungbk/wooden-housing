@@ -1,14 +1,8 @@
 "use client";
-import { ToggleSwitch } from "@/app/components/FormComponents/ToggleSwitch";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import React, { useState } from "react";
-import PhoneInput from "react-phone-input-2";
+import ConsultationRequest from "./ConsultationRequest";
 
 function Consultation() {
-  const [phoneValue, setPhoneValue] = useState("");
-
   return (
     <section
       style={{
@@ -21,64 +15,7 @@ function Consultation() {
         style={{ backgroundImage: "url('/images/consultation-bg.png')" }}
       >
         <div className='z-10 max-w-[1280px] xl:flex xl:flex-row-reverse xl:items-center xl:gap-[51px]'>
-          <div className='inline-flex h-[275px] w-full shrink-0 flex-col items-start justify-start gap-5 rounded-[15px] border-2 border-[#d75337] bg-white p-5 xl:h-auto xl:w-[587px] xl:p-[30px]'>
-            <div className='flex h-[162px] flex-col items-start justify-start gap-2.5 self-stretch xl:mb-[25px] xl:h-auto'>
-              <div className='self-stretch'>
-                <span className='text-[19px] font-medium leading-[33px] text-[#151515] xl:text-[28px]'>
-                  Get{" "}
-                </span>
-                <span className='text-[19px] font-medium leading-[33px] text-[#d75337] xl:text-[28px]'>
-                  free
-                </span>
-                <span className='text-[19px] font-medium leading-[33px] text-[#151515] xl:text-[28px]'>
-                  {" "}
-                  consultation
-                </span>
-              </div>
-              <div className='flex h-[119px] flex-col items-start justify-start gap-2.5 self-stretch'>
-                <div className='self-stretch text-base font-normal leading-[23px] text-[#464646]'>
-                  Please enter your mobile number:
-                </div>
-                <div className='inline-flex h-[43.61px] items-center justify-start gap-[8.23px] self-stretch rounded-md py-[12.34px] pl-[12.34px] pr-[5.76px] xl:h-[53px] xl:gap-2.5 xl:pl-0'>
-                  <PhoneInput
-                    value={phoneValue}
-                    inputStyle={{
-                      width: "100%",
-                      borderColor: "#F1F1F1",
-                      fontSize: "16px",
-                      background: "#f7f7f7",
-                    }}
-                    inputClass='h-8 xl:!h-[53px]'
-                    onChange={(value) => setPhoneValue(value)}
-                    countryCodeEditable={false}
-                    enableSearch={true}
-                    disableSearchIcon={true}
-                    placeholder='1234567890'
-                    disableCountryCode={false}
-                    country={"in"}
-                  />
-                  <div className='flex-center h-[53px] w-[68px] rounded-lg bg-[#D75337]'>
-                    <FontAwesomeIcon
-                      icon={faArrowRight}
-                      color='#fff'
-                      fontSize={20}
-                    />
-                  </div>
-                </div>
-                <div className='inline-flex items-center justify-start gap-2.5'>
-                  <ToggleSwitch />
-                  <div className='text-sm font-normal leading-[23px] text-[#151515]'>
-                    Reach me on whatsapp
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className='inline-flex items-center justify-center gap-2.5 self-stretch rounded-[10px] bg-[#d75337] px-2.5 py-[15px]'>
-              <div className='text-base font-semibold leading-[23px] text-white'>
-                Meet a designer
-              </div>
-            </div>
-          </div>
+          <ConsultationRequest />
           <div className='my-[19px] inline-flex w-full items-center justify-center xl:my-0'>
             <Image
               src={"/images/consultation.svg"}
@@ -135,8 +72,8 @@ function Consultation() {
                   <div className='text-xs font-normal leading-[17.15px] text-[#51684e] xl:text-xl'>
                     We are online now
                   </div>
-                  <div className='animate-ring flex-center h-[15.59px] w-[15.59px] rounded-full border border-[#77cf70]/30 xl:h-[25.07px] xl:w-[25.07px]'>
-                    <div className='animate-ring flex-center h-[10.39px] w-[10.39px] rounded-full border border-[#1daf11]/60 xl:h-[16.71px] xl:w-[16.71px]'>
+                  <div className='flex-center h-[15.59px] w-[15.59px] animate-ring rounded-full border border-[#77cf70]/30 xl:h-[25.07px] xl:w-[25.07px]'>
+                    <div className='flex-center h-[10.39px] w-[10.39px] animate-ring rounded-full border border-[#1daf11]/60 xl:h-[16.71px] xl:w-[16.71px]'>
                       <div className='h-[6.24px] w-[6.24px] rounded-full bg-[#1daf11] xl:h-2.5 xl:w-2.5' />
                     </div>
                   </div>
