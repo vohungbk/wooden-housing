@@ -51,11 +51,21 @@ const config: Config = {
           "50%": { transform: "scale(1.2)" },
           "100%": { transform: "scale(1)" },
         },
+        "bg-change-red": {
+          "0%": { backgroundColor: "white" },
+          "100%": { backgroundColor: "#D75337" },
+        },
+        "bg-change-white": {
+          "0%": { backgroundColor: "#D75337" },
+          "100%": { backgroundColor: "white" },
+        },
       },
       animation: {
         "infinite-scroll-left": "infinite-scroll-left 25s linear infinite",
         "infinite-scroll-right": "infinite-scroll-right 25s linear infinite",
         ring: "ring 2s infinite",
+        "bg-red": "bg-change-red 0.5s forwards",
+        "bg-white": "bg-change-white 0.5s forwards",
       },
     },
   },
