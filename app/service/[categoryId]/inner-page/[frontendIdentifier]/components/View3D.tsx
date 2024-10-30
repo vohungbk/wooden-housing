@@ -36,8 +36,8 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
   }, [swiper]);
 
   return (
-    <section className='bg-[#f6f3f6] xl:pb-[63px]'>
-      <div className='flex-center w-full bg-[#f6f3f6] pb-[26px]'>
+    <section className='bg-[#f6f3f6] pb-[37px] xl:pb-[63px]'>
+      <div className='flex-center mb-[39px] w-full bg-[#f6f3f6] xl:mb-[50px]'>
         <div className='w-full max-w-[1280px]'>
           <div className='mb-[18px] mt-[13px] flex justify-between px-[27px] xl:mb-[30px] xl:mt-[59px]'>
             <div className='text-[22px] font-semibold leading-[41px] text-[#352e39]'>
@@ -47,9 +47,12 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
               See All
             </div>
           </div>
-          <div className='mb-[29px] px-[26px]'>
-            <div className='relative flex h-[222px] w-full items-center justify-center rounded-[20px] bg-white py-[33px] xl:h-[606px] xl:py-0'>
-              <div className='relative h-[205px] w-full overflow-hidden rounded-[20px] xl:h-full'>
+          <div className='px-[26px] xl:px-0'>
+            <div className='relative flex h-[222px] w-full items-center justify-center rounded-[20px] bg-white xl:h-[606px]'>
+              <div
+                onClick={() => setOpenModal(true)}
+                className='relative h-full w-full cursor-pointer overflow-hidden rounded-[20px]'
+              >
                 <Image
                   src={gallery3d?.[0]}
                   alt='Gallery 3D'
@@ -75,9 +78,9 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
       </div>
       <div className='relative w-full xl:pb-10'>
         <Swiper
-          className='view-3d-swipper mt-[5px] !h-[168px] xl:!h-[360px]'
-          slidesPerView={isLargeScreen ? 3 : 2}
-          spaceBetween={20}
+          style={{ paddingRight: `${6 * gallery3d.length}px` }}
+          className={`mt-[5px] !h-[203px] xl:!h-[360px]`}
+          slidesPerView={"auto"}
           pagination={{
             el: isLargeScreen
               ? ".view-3d-swiper-pagination"
@@ -93,18 +96,22 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
           modules={[Pagination, Navigation]}
           onSwiper={setSwiper}
           initialSlide={1}
-          wrapperClass='xl:!h-[360px]'
+          wrapperClass='xl:!h-[360px] w-full'
           navigation={{
             prevEl: prevRef?.current,
             nextEl: nextRef?.current,
           }}
+          centerInsufficientSlides
         >
           {gallery3d.map((item, index) => (
-            <SwiperSlide key={index.toString()}>
-              <div className='relative h-full w-full overflow-hidden rounded-lg bg-white xl:p-0'>
+            <SwiperSlide
+              key={index.toString()}
+              className='mx-5 !h-[183px] !w-[247px] !bg-transparent xl:!h-[360px] xl:!w-[487px]'
+            >
+              <div className='relative h-full w-full overflow-hidden rounded-[8.84px] xl:p-0'>
                 <Image
                   src={item}
-                  className='rounded-md'
+                  className='rounded-[8.84px]'
                   alt=''
                   width={212}
                   height={138}
@@ -133,7 +140,7 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
         <div className='flex-center relative hidden w-full xl:mt-[43px] xl:flex'>
           <div className='hidden h-[58px] w-full max-w-[1280px] items-center justify-between lg:flex'>
             <div
-              className='swiper-button !relative !inset-0 -left-[30px] z-10 !h-[58px] !w-[58px] !bg-[#4B325A]'
+              className='swiper-button !relative !inset-0 -left-[30px] z-10 !h-[58px] !w-[58px] flex-shrink-0 !bg-[#4B325A]'
               ref={prevRef}
             >
               <FontAwesomeIcon
@@ -144,7 +151,7 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
             </div>
             <div className='view-3d-swiper-pagination block h-10' />
             <div
-              className='swiper-button !relative !inset-0 -left-[30px] z-10 !h-[58px] !w-[58px] !bg-[#4B325A]'
+              className='swiper-button !relative !inset-0 -left-[30px] z-10 !h-[58px] !w-[58px] flex-shrink-0 !bg-[#4B325A]'
               ref={nextRef}
             >
               <FontAwesomeIcon
@@ -155,7 +162,7 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
             </div>
           </div>
         </div>
-        <div className='swiper-custom-pagination !left-[45%] block rounded-[15px] xl:hidden' />
+        <div className='swiper-custom-pagination !bottom-2 !left-[45%] block rounded-[15px] xl:hidden' />
       </div>
       {!!openModal && (
         <ModalView3D

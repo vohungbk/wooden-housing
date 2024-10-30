@@ -40,6 +40,8 @@ async function ServiceInnerPage({
     } as CategoryType;
   }
 
+  console.log(serviceDetail);
+
   return (
     <section className='bg-white'>
       <InnerBanner
@@ -83,7 +85,7 @@ async function ServiceInnerPage({
         gallery3d={serviceDetail?.gallery3d!}
         link3D={serviceDetail?.models3d?.[0]!}
       />
-      <div className='flex-center mb-8 mt-[30px] h-[242px] w-full xl:mb-[55px] xl:mt-[98px] xl:h-[828px]'>
+      <div className='flex-center mb-8 mt-0 h-[242px] w-full xl:mb-[55px] xl:mt-[98px] xl:h-[828px]'>
         <div className='h-full w-full rounded-[7px] xl:max-w-[1280px]'>
           <video
             autoPlay

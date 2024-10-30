@@ -8,6 +8,7 @@ import {
   ResponsiveContainer,
   StackedCarousel,
 } from "react-stacked-center-carousel";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface ModalViewImageProps {
   open: boolean;
@@ -71,12 +72,21 @@ export const ModalViewImage: FC<ModalViewImageProps> = ({
           </div>
         </>
       </div>
-      <div className='carousel carousel-center bg-neutral rounded-box max-w-md space-x-4 p-4 xl:hidden'>
-        {gallery?.map((item) => (
-          <div key={item} className='carousel-item'>
-            <img src={item} className='rounded-box h-[400px] w-[300px]' />
-          </div>
-        ))}
+      <div className='block lg:hidden'>
+        <Swiper
+          slidesPerView={1.3}
+          spaceBetween={20}
+          pagination={{
+            clickable: true,
+          }}
+          className='!h-[400px]'
+        >
+          {gallery?.map((item, index) => (
+            <SwiperSlide key={index.toString()} className='rounded-box'>
+              <img src={item} className='h-[400px] w-[300px] rounded-box' />
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </Modal>
   );
