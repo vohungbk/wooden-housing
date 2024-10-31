@@ -56,19 +56,19 @@ async function ServiceInnerPage({
           <div className='mb-[29px] inline-flex items-center justify-start gap-1.5 pl-[1px] xl:mb-[43px] xl:mt-[11px]'>
             <Link
               href={"/"}
-              className='text-center text-xs font-normal leading-[18.67px] text-[#232323]'
+              className='text-center text-xs font-normal leading-[18.67px] text-[#232323] xl:text-[14px]'
             >
               Home
             </Link>
             <FontAwesomeIcon icon={faAngleRight} color='#D75337' fontSize={9} />
             <Link
               href={LIST_ROUTER.SERVICE}
-              className='text-center text-xs font-normal leading-[18.67px] text-[#232323]'
+              className='text-center text-xs font-normal leading-[18.67px] text-[#232323] xl:text-[14px]'
             >
               {categoryDetail?.name}
             </Link>
             <FontAwesomeIcon icon={faAngleRight} color='#D75337' fontSize={9} />
-            <div className='text-xs font-semibold leading-[18.67px] text-[#232323]'>
+            <div className='text-xs font-semibold leading-[18.67px] text-[#232323] xl:text-[14px]'>
               {serviceDetail?.title}
             </div>
           </div>

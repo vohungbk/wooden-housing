@@ -21,7 +21,7 @@ export const InnerBanner: FC<InnerBannerProps> = ({
 }) => {
   return (
     <div
-      className='relative h-full w-full bg-cover bg-no-repeat pb-[90px] xl:min-h-[636px]'
+      className='relative h-full min-h-[238px] w-full bg-cover bg-center bg-no-repeat xl:min-h-[636px]'
       style={{ backgroundImage: `url('${bannerImage}')` }}
     >
       <div className='absolute inset-0 bg-black bg-opacity-60'></div>

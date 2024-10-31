@@ -108,14 +108,10 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
               key={index.toString()}
               className='mx-5 !h-[183px] !w-[247px] !bg-transparent xl:!h-[360px] xl:!w-[487px]'
             >
-              <div className='relative h-full w-full overflow-hidden rounded-[8.84px] xl:p-0'>
-                <Image
-                  src={item}
-                  className='rounded-[8.84px]'
-                  alt=''
-                  width={212}
-                  height={138}
-                />
+              <div
+                style={{ backgroundImage: `url('${item}')` }}
+                className='relative h-full w-full overflow-hidden rounded-[8.84px] bg-cover bg-center bg-no-repeat xl:p-0'
+              >
                 <div
                   className='absolute bottom-0 left-0 flex h-[75px] w-full items-end justify-end rounded-lg px-3 pb-[11px]'
                   style={{

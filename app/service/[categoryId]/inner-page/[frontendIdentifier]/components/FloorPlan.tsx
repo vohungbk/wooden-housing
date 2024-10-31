@@ -1,28 +1,18 @@
 "use client";
 
+import ImageDisplay from "@/app/components/ImageDisplay";
 import { getOrdinalSuffix } from "@/app/shared/utils";
 import { IFloor } from "@/app/types/services";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import React, { FC, useState } from "react";
+import { FC } from "react";
 
 interface FloorPlanProps {
   floorData: IFloor[];
 }
 
 export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
-  const [aspectRatio, setAspectRatio] = useState(1);
-  const [aspectRatio1, setAspectRatio1] = useState(1);
-
-  const handleImageLoad = (naturalWidth: number, naturalHeight: number) => {
-    setAspectRatio(naturalWidth / naturalHeight);
-  };
-
-  const handleImage1Load = (naturalWidth: number, naturalHeight: number) => {
-    setAspectRatio1(naturalWidth / naturalHeight);
-  };
-
   const FeatureItem = ({ label }: { label: string }) => (
     <div className='inline-flex items-center justify-start gap-[8.18px] self-stretch xl:gap-[12.75px]'>
       <FontAwesomeIcon
@@ -154,9 +144,7 @@ export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
                   className={`mb-[95px] hidden w-full gap-12 xl:mb-0 xl:flex xl:items-center ${index % 2 === 0 ? "flex-row-reverse" : "flex-row"}`}
                 >
                   <FloorInfo floor={item} index={index} />
-                  <div className='relative h-[470px] w-full'>
-                    <Image src={item.floorPlan} alt='' fill />
-                  </div>
+                  <ImageDisplay alt='floor Plan' src={item.floorPlan} />
                 </div>
                 <div
                   className='flex-center hidden h-full w-full bg-no-repeat py-20 xl:inline-flex'
@@ -164,17 +152,10 @@ export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
                     backgroundImage: "url('/images/1st-floor-bg-desktop.png')",
                   }}
                 >
-                  <div className='relative w-full' style={{ aspectRatio }}>
-                    <Image
-                      src={item.floorElevation}
-                      alt='Floor Elevation'
-                      layout='fill'
-                      objectFit='contain'
-                      onLoadingComplete={({ naturalWidth, naturalHeight }) =>
-                        handleImageLoad(naturalWidth, naturalHeight)
-                      }
-                    />
-                  </div>
+                  <ImageDisplay
+                    alt='Floor Elevation'
+                    src={item.floorElevation}
+                  />
                 </div>
               </div>
             ))}
@@ -185,41 +166,22 @@ export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
       <div className='w-full'>
         {floorData?.map((item, index) => (
           <div key={index.toString()} className='mb-9 block xl:hidden'>
-            <div
-              style={{ aspectRatio: aspectRatio1 }}
-              className='relative mb-[38px] w-full max-w-full'
-            >
-              <Image
-                src={item.floorPlan}
-                alt=''
-                fill
-                priority
-                style={{ objectFit: "cover" }}
-                sizes='(max-width: 768px) 100vw, 700px'
-                onLoadingComplete={({ naturalWidth, naturalHeight }) =>
-                  handleImage1Load(naturalWidth, naturalHeight)
-                }
-              />
-            </div>
+            <ImageDisplay
+              alt=''
+              src={item.floorPlan}
+              className='mb-[38px] max-w-full'
+              sizes='(max-width: 768px) 100vw, 700px'
+            />
             <FloorInfo floor={item} index={index} />
             <div
               className='flex-center mb-[27px] mt-[17px] h-[270px] w-full bg-cover bg-center bg-no-repeat'
               style={{ backgroundImage: "url('/images/1st-floor-bg.png')" }}
             >
-              <div
-                className='relative w-full max-w-[376px]'
-                style={{ aspectRatio }}
-              >
-                <Image
-                  src={item.floorElevation}
-                  alt='Floor Elevation'
-                  layout='fill'
-                  objectFit='contain'
-                  onLoadingComplete={({ naturalWidth, naturalHeight }) =>
-                    handleImageLoad(naturalWidth, naturalHeight)
-                  }
-                />
-              </div>
+              <ImageDisplay
+                className='max-w-[376px]'
+                alt='Floor Elevation'
+                src={item.floorElevation}
+              />
             </div>
             {index !== floorData?.length - 1 && (
               <div className='mb-[40px] mt-[27px]'>
