@@ -13,9 +13,14 @@ interface FloorPlanProps {
 
 export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
   const [aspectRatio, setAspectRatio] = useState(1);
+  const [aspectRatio1, setAspectRatio1] = useState(1);
 
   const handleImageLoad = (naturalWidth: number, naturalHeight: number) => {
     setAspectRatio(naturalWidth / naturalHeight);
+  };
+
+  const handleImage1Load = (naturalWidth: number, naturalHeight: number) => {
+    setAspectRatio1(naturalWidth / naturalHeight);
   };
 
   const FeatureItem = ({ label }: { label: string }) => (
@@ -180,12 +185,20 @@ export const FloorPlan: FC<FloorPlanProps> = ({ floorData }) => {
       <div className='w-full'>
         {floorData?.map((item, index) => (
           <div key={index.toString()} className='mb-9 block xl:hidden'>
-            <div className='relative mb-[38px] h-[230px] w-full max-w-[378px] 430:h-[250px]'>
+            <div
+              style={{ aspectRatio: aspectRatio1 }}
+              className='relative mb-[38px] w-full max-w-full'
+            >
               <Image
                 src={item.floorPlan}
                 alt=''
                 fill
+                priority
                 style={{ objectFit: "cover" }}
+                sizes='(max-width: 768px) 100vw, 700px'
+                onLoadingComplete={({ naturalWidth, naturalHeight }) =>
+                  handleImage1Load(naturalWidth, naturalHeight)
+                }
               />
             </div>
             <FloorInfo floor={item} index={index} />

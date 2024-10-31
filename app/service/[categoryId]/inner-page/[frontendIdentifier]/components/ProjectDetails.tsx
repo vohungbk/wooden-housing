@@ -3,7 +3,6 @@
 import { IProjectDetailsType } from "@/app/types/services";
 import React, { FC, useState } from "react";
 import { ProjectItems } from "./ProjectItems";
-import Image from "next/image";
 import { ModalViewImage } from "./ModalViewImage";
 
 interface ProjectDetailsProps {
@@ -30,45 +29,50 @@ export const ProjectDetails: FC<ProjectDetailsProps> = ({
           style={{ backgroundImage: `url('${mainImage}')` }}
         >
           <div className='absolute inset-0 rounded-[10px] bg-gradient-to-b from-transparent to-black opacity-60' />
-          <div className='absolute -bottom-[37.5px] left-1 flex gap-[14px] 430:left-[29.69px] xl:-bottom-[60.5px]'>
+          <div className='absolute -bottom-[37.5px] left-1 flex gap-1 430:left-[29.69px] 430:gap-[14px] xl:-bottom-[60.5px]'>
             {gallery?.length > 1 && (
-              <Image
-                src={gallery[1]}
-                alt=''
-                width={96}
-                height={75}
-                className='rounded xl:!h-[121px] xl:!w-[156px]'
-              />
+              <div className='rounded-lg bg-white p-[3px]'>
+                <div
+                  className='h-[75px] w-[96px] rounded-lg bg-cover bg-center bg-no-repeat xl:!h-[121px] xl:!w-[156px]'
+                  style={{
+                    backgroundImage: ` url('${gallery[1]}')`,
+                  }}
+                ></div>
+              </div>
             )}
             {gallery?.length > 2 && (
-              <Image
-                className='rounded xl:!h-[121px] xl:!w-[156px]'
-                src={gallery[2]}
-                alt=''
-                width={96}
-                height={75}
-              />
+              <div className='rounded-lg bg-white p-[3px]'>
+                <div
+                  className='h-[75px] w-[96px] rounded-lg bg-cover bg-center bg-no-repeat xl:!h-[121px] xl:!w-[156px]'
+                  style={{
+                    backgroundImage: ` url('${gallery[2]}')`,
+                  }}
+                ></div>
+              </div>
             )}
             {gallery?.length > 3 && (
-              <Image
-                src={gallery[3]}
-                alt=''
-                width={96}
-                height={75}
-                className='hidden rounded xl:block xl:!h-[121px] xl:!w-[156px]'
-              />
+              <div className='hidden rounded-lg bg-white p-[3px] xl:block'>
+                <div
+                  className='rounded-lg bg-cover bg-center bg-no-repeat xl:!h-[121px] xl:!w-[156px]'
+                  style={{
+                    backgroundImage: ` url('${gallery[1]}')`,
+                  }}
+                ></div>
+              </div>
             )}
             {gallery.length > maxGalleryItems && (
-              <div
-                className='flex-center relative h-[75.37px] w-[96.78px] cursor-pointer rounded bg-cover bg-center bg-no-repeat xl:!h-[121px] xl:!w-[156px]'
-                style={{
-                  backgroundImage: `url('${gallery[gallery.length - 1]}')`,
-                }}
-                onClick={() => setOpenModal(true)}
-              >
-                <div className='absolute left-0 top-0 h-[75.37px] w-[96.78px] rounded border border-white bg-black/50 xl:!h-[121px] xl:!w-[156px]' />
-                <div className='z-10 text-center text-xs font-medium leading-[12.88px] text-white'>
-                  View more ({galleryExcess})
+              <div className='rounded-lg bg-white p-[3px]'>
+                <div
+                  className='flex-center relative h-[75.37px] w-[96.78px] cursor-pointer rounded-lg bg-cover bg-center bg-no-repeat xl:!h-[121px] xl:!w-[156px]'
+                  style={{
+                    backgroundImage: `url('${gallery[gallery.length - 1]}')`,
+                  }}
+                  onClick={() => setOpenModal(true)}
+                >
+                  <div className='absolute left-0 top-0 h-[75.37px] w-[96.78px] rounded-lg bg-black/50 xl:!h-[121px] xl:!w-[156px]' />
+                  <div className='z-10 text-center text-xs font-medium leading-[12.88px] text-white'>
+                    View more ({galleryExcess})
+                  </div>
                 </div>
               </div>
             )}

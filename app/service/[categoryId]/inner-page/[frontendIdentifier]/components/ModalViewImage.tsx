@@ -82,8 +82,8 @@ export const ModalViewImage: FC<ModalViewImageProps> = ({
           className='!h-[400px]'
         >
           {gallery?.map((item, index) => (
-            <SwiperSlide key={index.toString()} className='rounded-box'>
-              <img src={item} className='h-[400px] w-[300px] rounded-box' />
+            <SwiperSlide key={index.toString()} className='rounded-lg'>
+              <img src={item} className='h-[400px] w-[300px] rounded-lg' />
             </SwiperSlide>
           ))}
         </Swiper>
