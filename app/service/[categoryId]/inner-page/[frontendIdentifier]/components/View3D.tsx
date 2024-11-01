@@ -9,6 +9,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { NavigationOptions } from "swiper/types";
 import { ModalView3D } from "./ModalView3D";
+import { ModalViewImage } from "./ModalViewImage";
 
 interface View3DProps {
   gallery3d: string[];
@@ -17,6 +18,7 @@ interface View3DProps {
 
 export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
   const [openModal, setOpenModal] = useState(false);
+  const [openModalViewImage, setOpenModalViewImage] = useState(false);
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
@@ -119,7 +121,10 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
                       "linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.46) 100%)",
                   }}
                 >
-                  <div>
+                  <div
+                    className='cursor-pointer'
+                    onClick={() => setOpenModalViewImage(true)}
+                  >
                     <Image
                       src={"/icons/full.svg"}
                       alt=''
@@ -165,6 +170,13 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
         onCloseModal={() => setOpenModal(false)}
         link3D={link3D}
       />
+      {openModalViewImage && (
+        <ModalViewImage
+          open={openModalViewImage}
+          onCloseModal={() => setOpenModalViewImage(false)}
+          gallery={gallery3d}
+        />
+      )}
     </section>
   );
 };
