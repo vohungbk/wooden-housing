@@ -160,13 +160,11 @@ export const View3D: FC<View3DProps> = ({ gallery3d = [], link3D }) => {
         </div>
         <div className='swiper-custom-pagination !bottom-2 !left-[45%] block rounded-[15px] xl:hidden' />
       </div>
-      {!!openModal && (
-        <ModalView3D
-          open={openModal}
-          onCloseModal={() => setOpenModal(false)}
-          link3D={link3D}
-        />
-      )}
+      <ModalView3D
+        open={openModal}
+        onCloseModal={() => setOpenModal(false)}
+        link3D={link3D}
+      />
     </section>
   );
 };

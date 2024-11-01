@@ -26,7 +26,7 @@ export const ModalViewImage: FC<ModalViewImageProps> = ({
 
   return (
     <Modal open={open} onClose={onCloseModal} center>
-      <div className='relative hidden w-full xl:block'>
+      <div className='relative hidden h-full w-full items-center justify-center xl:flex'>
         <ResponsiveContainer
           carouselRef={ref}
           render={(parentWidth, carouselRef) => {
@@ -46,7 +46,7 @@ export const ModalViewImage: FC<ModalViewImageProps> = ({
               />
             );
           }}
-        />
+        ></ResponsiveContainer>
         <>
           <div
             style={{ position: "absolute", top: "40%", left: 10, zIndex: 10 }}
@@ -58,7 +58,12 @@ export const ModalViewImage: FC<ModalViewImageProps> = ({
             <FontAwesomeIcon icon={faAngleLeft} color='#ffffff' fontSize={20} />
           </div>
           <div
-            style={{ position: "absolute", top: "40%", right: 10, zIndex: 10 }}
+            style={{
+              position: "absolute",
+              top: "40%",
+              right: 10,
+              zIndex: 10,
+            }}
             className='flex-center !h-[58px] !w-[58px] cursor-pointer rounded-full !bg-[#4B325A]'
             onClick={() => {
               ref.current?.goNext(6);
@@ -104,10 +109,9 @@ export const Card = React.memo(function Card({ data, dataIndex }: CardProps) {
     <div
       style={{
         width: "100%",
-        height: 300,
         userSelect: "none",
       }}
-      className='my-slide-component'
+      className='h-[300px] xl:h-[450px]'
     >
       <img
         style={{

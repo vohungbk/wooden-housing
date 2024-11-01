@@ -131,7 +131,8 @@ body {
   margin-left: 0;
   margin-right: 0;
   max-width: 1200px;
-  border-radius: 2px;
+  border-radius: 9px;
+  @apply border-[3px] border-[#D75337] xl:h-[707px];
 }
 
 .react-responsive-modal-closeButton {
@@ -148,4 +149,8 @@ body {
 
 .project-info div:nth-child(even) {
   background-color: #fbfbfb;
+}
+
+.ReactModal__Overlay {
+  @apply flex items-center justify-center;
 }
