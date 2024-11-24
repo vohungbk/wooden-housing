@@ -1,1 +1,1 @@
-echo “npm run format” > .husky/pre-commit
+npx lint-staged
