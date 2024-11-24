@@ -150,7 +150,7 @@ function WhyChoose() {
         <div className='inline-flex w-full flex-nowrap overflow-hidden'>
           <ul
             ref={logosRef}
-            className='animate-infinite-scroll-right flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
+            className='flex animate-infinite-scroll-right items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
           >
             {data
               ?.slice(0, 4)
@@ -158,7 +158,7 @@ function WhyChoose() {
           </ul>
           <ul
             ref={logosRef}
-            className='animate-infinite-scroll-right flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
+            className='flex animate-infinite-scroll-right items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
           >
             {data
               ?.slice(0, 4)
@@ -170,7 +170,7 @@ function WhyChoose() {
         <div className='inline-flex w-full flex-nowrap overflow-hidden'>
           <ul
             ref={logosRef}
-            className='animate-infinite-scroll-left flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
+            className='flex animate-infinite-scroll-left items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
           >
             {data
               ?.slice(-4)
@@ -178,7 +178,7 @@ function WhyChoose() {
           </ul>
           <ul
             ref={logosRef}
-            className='animate-infinite-scroll-left flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
+            className='flex animate-infinite-scroll-left items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-2.5'
           >
             {data
               ?.slice(-4)
@@ -190,13 +190,13 @@ function WhyChoose() {
         <div className='inline-flex w-full flex-nowrap overflow-hidden'>
           <ul
             ref={logosRef}
-            className='animate-infinite-scroll-right flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-5'
+            className='flex animate-infinite-scroll-right items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-5'
           >
             {data?.map((item) => <Items data={item} key={item.id} />)}
           </ul>
           <ul
             ref={logosRef}
-            className='animate-infinite-scroll-right flex items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-5'
+            className='flex animate-infinite-scroll-right items-center justify-center md:justify-start [&_img]:max-w-none [&_li]:mx-5'
           >
             {data?.map((item) => <Items data={item} key={item.id} />)}
           </ul>

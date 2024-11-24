@@ -82,8 +82,8 @@ function FocusWooden() {
             />
           </div>
         </div>
-        <div className='bg-3dViewHouseModel1Desktop absolute -bottom-2 right-3 h-[432px] w-[760px]'></div>
-        <div className='bg-3dViewHouseModel2Desktop absolute bottom-0 right-[18px] h-[360px] w-[794px]'></div>
+        <div className='absolute -bottom-2 right-3 h-[432px] w-[760px] bg-3dViewHouseModel1Desktop'></div>
+        <div className='absolute bottom-0 right-[18px] h-[360px] w-[794px] bg-3dViewHouseModel2Desktop'></div>
       </div>
     </section>
   );
