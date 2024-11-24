@@ -3,13 +3,13 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FISEBASE_API_KEY,
-  authDomain: "woodenhousing-48e9b.firebaseapp.com",
-  projectId: "woodenhousing-48e9b",
-  storageBucket: "woodenhousing-48e9b.appspot.com",
-  messagingSenderId: "424149034900",
-  appId: "1:424149034900:web:33d95bea4f247eaff69181",
-  measurementId: "G-JWQZJV973D",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: "wooden-housing-c0ee8.firebaseapp.com",
+  projectId: "wooden-housing-c0ee8",
+  storageBucket: "wooden-housing-c0ee8.firebasestorage.app",
+  messagingSenderId: "975564856561",
+  appId: "1:975564856561:web:5e9d0e2077b690c0305d50",
+  measurementId: "G-P9BBMRH6H2",
 };
 
 const app = initializeApp(firebaseConfig);

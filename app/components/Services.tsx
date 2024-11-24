@@ -22,7 +22,7 @@ function Services() {
 
   useEffect(() => {
     (async () => {
-      const postCollectionRef = collection(db, "serviceCategories");
+      const postCollectionRef = collection(db, "categories");
       const postCollectionSnapshot = await getDocs(postCollectionRef);
 
       const list = postCollectionSnapshot.docs.map((doc) => {
@@ -32,6 +32,8 @@ function Services() {
       setCategoryList(list);
     })();
   }, []);
+
+  console.log(JSON.stringify(categoryList, null, 2));
 
   useEffect(() => {
     if (swiper && swiper.params.navigation && swiper.navigation) {
@@ -92,7 +94,7 @@ function Services() {
               className='mb-6 mr-0.5 hidden lg:block'
             />
             <span className='font-orengano text-base font-normal leading-[18.03px] text-[#454545] lg:text-2xl'>
-              What we build today makes all the difference{" "}
+              What we build today makes all the difference&nbsp;
             </span>
             <span className='font-orengano text-base font-normal leading-[18.03px] text-[#d75337] lg:text-2xl'>
               tomorrow.

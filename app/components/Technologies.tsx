@@ -83,7 +83,7 @@ function Technologies() {
             a strong home
           </div>
         </div>
-        <div className='flex max-w-[1420px] justify-center'>
+        <div className='mx-auto flex max-w-[1420px] justify-center'>
           <div className='grid w-full max-w-[1420px] grid-cols-2 gap-[15px] sm:col-span-7 lg:grid-cols-4 lg:gap-10'>
             {TechData.map((item) => (
               <div key={item.id}>

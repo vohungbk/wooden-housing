@@ -154,3 +154,8 @@ body {
 .ReactModal__Overlay {
   @apply flex items-center justify-center;
 }
+
+.disabled .prev-link,
+.disabled .next-link {
+  cursor: default;
+}

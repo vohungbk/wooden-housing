@@ -4,7 +4,7 @@ import React from "react";
 function Banner() {
   return (
     <>
-      <section className='relative w-full max-w-[1920px] bg-banner bg-cover bg-no-repeat pt-[34px] text-center lg:flex lg:h-[440px] lg:items-center lg:pt-0 xl:h-[480px]'>
+      <section className='relative mx-auto w-full bg-banner bg-cover bg-no-repeat pt-[34px] text-center lg:flex lg:h-[440px] lg:items-center lg:pt-0 xl:h-[480px] 2xl:mb-5 2xl:h-[588px]'>
         <div className='flex flex-col justify-center lg:h-full lg:items-start lg:justify-center lg:pl-[5%] 2xl:pl-[200px]'>
           <div className='flex justify-center lg:mb-[9px] lg:justify-start'>
             <div className='h-[113px] w-full max-w-[330px] text-center lg:h-auto lg:w-[630px] lg:max-w-[630px] lg:text-left'>
@@ -62,7 +62,7 @@ function Banner() {
             </button>
           </div>
         </div>
-        <div className='absolute -bottom-[25px] -left-[1px] z-10 h-[50px] w-full origin-bottom rotate-2 bg-white lg:left-0'></div>
+        <div className='absolute -bottom-[25px] -left-[1px] z-10 h-[50px] w-full origin-bottom rotate-2 bg-white lg:left-0 2xl:-bottom-[45px]'></div>
         <Image
           src={"/images/banner-image.svg"}
           alt='Banner'

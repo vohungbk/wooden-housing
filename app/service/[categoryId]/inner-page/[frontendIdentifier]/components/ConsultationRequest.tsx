@@ -1,7 +1,7 @@
 "use client";
 
-import Input from "@/app/components/FormComponents/Input";
-import { ToggleSwitch } from "@/app/components/FormComponents/ToggleSwitch";
+import Input from "@/app/components/form/Input";
+import { ToggleSwitch } from "@/app/components/form/ToggleSwitch";
 import { db } from "@/app/configs/firebase";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

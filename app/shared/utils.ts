@@ -1,3 +1,6 @@
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export const getOrdinalSuffix = (num: number) => {
   const j = num % 10;
   const k = num % 100;
@@ -12,3 +15,7 @@ export const getOrdinalSuffix = (num: number) => {
   }
   return `${num}th`;
 };
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}

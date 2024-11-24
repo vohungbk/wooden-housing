@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write */**/*.{js,jsx,json,ts,tsx,scss,css,md}"
+    "prettier": "prettier --write */**/*.{js,jsx,json,ts,tsx,scss,css,md}",
+    "prepare": "husky"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -16,15 +17,19 @@
     "@react-three/drei": "^9.115.0",
     "@react-three/fiber": "^8.17.10",
     "autoprefixer": "^10.4.20",
+    "clsx": "^2.1.1",
     "firebase": "^11.0.1",
     "framer-motion": "^11.11.9",
     "next": "^14.2.16",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-paginate": "^8.2.0",
     "react-phone-input-2": "^2.15.1",
     "react-responsive-modal": "^6.4.2",
+    "react-select": "^5.8.2",
     "react-stacked-center-carousel": "^1.0.14",
     "swiper": "^11.1.14",
+    "tailwind-merge": "^2.5.4",
     "three": "^0.169.0"
   },
   "devDependencies": {
@@ -34,6 +39,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "15.0.1",
+    "husky": "^9.1.7",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",

@@ -41,7 +41,7 @@ function Header() {
 
   useEffect(() => {
     (async () => {
-      const postCollectionRef = collection(db, "serviceCategories");
+      const postCollectionRef = collection(db, "categories");
       const postCollectionSnapshot = await getDocs(postCollectionRef);
 
       const list = postCollectionSnapshot.docs.map((doc) => {

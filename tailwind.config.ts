@@ -8,7 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {},
+      colors: {
+        active: "#D75337",
+      },
       screens: {
         "375": "375px",
         "430": "430px",

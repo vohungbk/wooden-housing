@@ -19,10 +19,10 @@ async function ServiceInnerPage({
   let serviceDetail = null;
   let categoryDetail = null;
 
-  const postCollectionRef = collection(db, "services");
-  const postCollectionSnapshot = await getDocs(postCollectionRef);
+  const servicesCollectionRef = collection(db, "services");
+  const servicesCollectionSnapshot = await getDocs(servicesCollectionRef);
 
-  const list = postCollectionSnapshot.docs.map((doc) => {
+  const list = servicesCollectionSnapshot.docs.map((doc) => {
     return { id: doc.id, ...doc.data() } as ServiceType;
   });
 
@@ -30,7 +30,7 @@ async function ServiceInnerPage({
     (item) => item.frontendIdentifier === decodeURIComponent(frontendIdentifier)
   );
 
-  const docCategoryRef = doc(db, "serviceCategories", categoryId);
+  const docCategoryRef = doc(db, "categories", categoryId);
   const docCategorySnap = await getDoc(docCategoryRef);
 
   if (docCategorySnap.exists()) {
@@ -39,8 +39,6 @@ async function ServiceInnerPage({
       ...docCategorySnap.data(),
     } as CategoryType;
   }
-
-  console.log(serviceDetail);
 
   return (
     <section className='bg-white'>
