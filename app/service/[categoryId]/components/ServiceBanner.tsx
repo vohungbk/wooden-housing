@@ -1,12 +1,18 @@
+import { CategoryType } from "@/app/types/services";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import React, { FC } from "react";
 
-function ServiceBanner() {
+interface ServiceBannerProps {
+  categoryDetail: CategoryType;
+}
+
+export const ServiceBanner: FC<ServiceBannerProps> = ({ categoryDetail }) => {
   return (
     <section
       style={{
-        backgroundImage: "url('/images/service-banner.jpeg')",
+        backgroundImage: `url('${categoryDetail?.coverImage}')`,
       }}
       className='relative flex h-[209px] flex-col bg-cover bg-center bg-no-repeat pl-[27px] pt-[5px] xl:h-[239px]'
     >
@@ -41,10 +47,7 @@ function ServiceBanner() {
           />
           <div className='text-center'>
             <span className='text-[22px] font-semibold leading-[30.84px] text-white xl:text-[42px] xl:leading-[42px]'>
-              Wooden{" "}
-            </span>
-            <span className='text-[22px] font-semibold leading-[30.84px] text-[#d75438] xl:text-[42px] xl:leading-[42px]'>
-              Villa
+              {categoryDetail?.name}
             </span>
           </div>
           <Image
@@ -56,11 +59,9 @@ function ServiceBanner() {
           />
         </div>
         <p className='text-center text-xs font-light leading-[17.93px] text-white xl:text-xl'>
-          Wood is a high-performance building material
+          {categoryDetail?.description}
         </p>
       </div>
     </section>
   );
-}
-
-export default ServiceBanner;
+};

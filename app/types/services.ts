@@ -54,7 +54,7 @@ interface IProjectDetailsType {
 
 type ServiceType = {
   id: string;
-  category: string;
+  categoryId: string;
   description: string;
   img: string;
   gallery3d: string[];
