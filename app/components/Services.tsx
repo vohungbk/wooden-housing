@@ -33,8 +33,6 @@ function Services() {
     })();
   }, []);
 
-  console.log(JSON.stringify(categoryList, null, 2));
-
   useEffect(() => {
     if (swiper && swiper.params.navigation && swiper.navigation) {
       const navigation = swiper.params.navigation as NavigationOptions;

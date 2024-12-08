@@ -75,7 +75,7 @@ function Step({
 
   return (
     <button
-      className={`flex-center h-[23.78px] w-[23.78px] cursor-pointer rounded-[31.35px] xl:h-[59px] xl:w-[59px] xl:rounded-[77.79px] ${isActive ? "bg-[#d75337]" : "border-[0.81px] border-[#D75337] bg-white"} ${animationClass}`}
+      className={`flex-center h-[23.78px] w-[23.78px] cursor-pointer rounded-[31.35px] xl:h-[50px] xl:w-[50px] xl:rounded-[77.79px] ${isActive ? "bg-[#d75337]" : "border-[0.81px] border-[#D75337] bg-white"} ${animationClass}`}
       onClick={onClick}
     >
       <p
@@ -99,7 +99,7 @@ function StepList({
       {stepsData.map(({ value, label }, index) => (
         <div
           key={value}
-          className='mr-[3px] inline-flex flex-col items-center justify-start gap-5 xl:w-[178px]'
+          className='mr-[3px] inline-flex flex-col items-center justify-start xl:w-[178px]'
         >
           <div className='flex items-center gap-[3px] xl:gap-1.5'>
             {index > 0 && <LineConnect isActive={step >= value} />}
@@ -124,9 +124,9 @@ function HowItWorks() {
   const [step, setStep] = useState(1);
 
   return (
-    <section className='flex-center w-full xl:mb-[172px]'>
-      <div className='w-full max-w-[1280px] px-[26px] pb-[34px] xl:p-0'>
-        <div className='inline-flex w-full flex-col items-center justify-start gap-1'>
+    <section className='how-it-works w-full xl:mb-[172px]'>
+      <div className='mx-auto w-full max-w-[1280px] px-[26px] pb-[34px] xl:p-0'>
+        <div className='mb-[25px] inline-flex w-full flex-col items-center justify-start gap-1'>
           <div className='inline-flex w-[380px] items-center justify-center xl:w-full'>
             <Image
               src={"/images/how-it-work.svg"}
@@ -165,15 +165,15 @@ function HowItWorks() {
             odio laborum
           </div>
         </div>
-        <div className='relative mb-[39px] mt-[25px] block h-6 w-full xl:hidden xl:h-[107px]'>
+        <div className='relative mb-[39px] block h-6 w-full xl:hidden xl:h-[107px]'>
           <StepList step={step} setStep={setStep} />
         </div>
-        <div className='relative mb-[39px] mt-[25px] hidden h-6 w-full xl:block xl:h-[107px]'>
+        <div className='relative hidden h-6 w-full xl:block xl:h-[107px]'>
           <div className='relative flex w-full justify-center xl:h-[125px]'>
             {stepsData.map(({ value, label }, index) => (
               <div
                 key={value}
-                className='mr-[3px] inline-flex flex-col items-center justify-start gap-5 xl:w-[178px]'
+                className='mr-[3px] inline-flex flex-col items-center justify-start xl:w-[178px]'
               >
                 <div className='relative flex items-center gap-[3px] xl:gap-1.5'>
                   {index > 0 && (
@@ -182,13 +182,13 @@ function HowItWorks() {
                       className='absolute -left-0.5 top-[27px]'
                     />
                   )}
-                  <div className='flex w-[178px] flex-col items-center justify-start gap-5'>
+                  <div className='flex w-[178px] flex-col items-center justify-start gap-[17px]'>
                     <Step
                       stepValue={value}
                       isActive={step >= value}
                       onClick={() => setStep(value)}
                     />
-                    <h4 className='text-center text-base font-medium text-[#161616]'>
+                    <h4 className='text-center text-base font-medium leading-[17px] text-[#161616]'>
                       {label}
                     </h4>
                   </div>
@@ -203,7 +203,7 @@ function HowItWorks() {
             ))}
           </div>
         </div>
-        <div className='relative mb-[34px] h-[253px] w-full xl:mb-0 xl:h-[362px]'>
+        <div className='relative mb-[34px] h-[253px] w-full xl:mb-0 xl:mt-[55px] xl:h-[362px]'>
           <Image src={`/images/how-it-work-${step}.svg`} alt='' fill />
         </div>
         <h4 className='text-lg font-medium leading-snug text-[#282828] xl:hidden'>

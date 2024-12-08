@@ -125,7 +125,12 @@ function Header() {
               </AnimatePresence>
             </div>
             <div className='inline-flex cursor-pointer text-lg font-normal text-[#1e1e21]'>
-              <div className='text-lg font-normal text-[#1e1e21]'>About Us</div>
+              <Link
+                href={LIST_ROUTER.ABOUT_US}
+                className='text-lg font-normal text-[#1e1e21]'
+              >
+                About Us
+              </Link>
             </div>
             <div className='inline-flex cursor-pointer text-lg font-normal text-[#1e1e21]'>
               <div className='text-lg font-normal text-[#1e1e21]'> Blog</div>
