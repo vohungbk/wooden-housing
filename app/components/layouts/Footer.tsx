@@ -1,3 +1,4 @@
+import { LIST_ROUTER } from "@/app/shared/constant";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -21,9 +22,12 @@ function Footer() {
               <div className='Services text-base font-light tracking-wide text-white'>
                 Services
               </div>
-              <div className='AboutUs text-base font-light tracking-wide text-white'>
+              <Link
+                href={LIST_ROUTER.ABOUT_US}
+                className='text-base font-light tracking-wide text-white'
+              >
                 About Us
-              </div>
+              </Link>
               <div className='ContactUs text-base font-light tracking-wide text-white'>
                 Contact Us
               </div>
@@ -128,7 +132,7 @@ function Footer() {
                 Services
               </Link>
               <Link
-                href={"/"}
+                href={LIST_ROUTER.ABOUT_US}
                 className='font-text-lg font-light tracking-wide text-white hover:text-[#ffda30]'
               >
                 About Us

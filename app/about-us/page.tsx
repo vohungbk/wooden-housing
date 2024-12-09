@@ -1,437 +1,265 @@
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+"use client";
+
 import Image from "next/image";
 import Consultation from "../service/[categoryId]/inner-page/[frontendIdentifier]/components/Consultation";
+import Banner from "./components/Banner";
+import Mission from "./components/Mission";
+import { cn } from "../shared/utils";
+import useIsMobile from "../hooks/useIsMobile";
 
-const MissionIcon = () => (
-  <div>
-    <FontAwesomeIcon
-      icon={faAngleRight}
-      color='#D75337B0'
-      className='text-[15px] xl:text-[8px]'
-    />
-    <FontAwesomeIcon
-      icon={faAngleRight}
-      color='#D75337'
-      className='text-[15px] xl:text-[8px]'
-    />
-  </div>
-);
+const data = [
+  {
+    id: 1,
+    title: {
+      main: "Sustainability",
+      sub: "Building a Greener Future",
+    },
+    value: [
+      {
+        title: "Recyclable Materials for a Circular Economy",
+        description:
+          "We are dedicated to utilizing materials that support a circular economy, where no resource is wasted, and everything serves a purpose. Wood, the foundation of our construction, is fully renewable, enabling us to minimize waste and support a sustainable life cycle. This strategy not only decreases environmental impact by reducing the carbon footprint but also ensures our buildings foster a healthier planet for future generations.",
+      },
+      {
+        title: "Reducing Carbon Footprint: A Commitment to Biodiversity",
+        description:
+          "We consistently pursue and apply eco-friendly construction methods that reduce carbon emissions. Our designs aim for a low carbon footprint, supporting the global fight against climate change. By selecting wood as the main construction material and techniques that enhance biodiversity and environmental well-being, we guarantee that our buildings are not only sustainable but also considerate of the ecosystems they reside in.",
+      },
+    ],
+    image: "/images/about-1.png",
+    imageDesktop: "/images/about-1-desktop.png",
+    imageHeightMobile: 325,
+    imageHeightDesktop: 703,
+  },
+  {
+    id: 2,
+    title: {
+      main: "Comfort",
+      sub: "Creating Spaces that Enhance Well-being",
+    },
+    value: [
+      {
+        title: "Superior Insulation for Optimal Comfort",
+        description:
+          "Comfort starts with effective insulation. We utilize wooden materials that offer exceptional thermal and soundproofing, guaranteeing our homes maintain a stable and comfortable indoor climate no matter the external weather. This creates peaceful, tranquil spaces that support relaxation and well-being all year round.",
+      },
+      {
+        title: "Customized Environments Tailored to Your Needs",
+        description:
+          "Each home we construct mirrors the distinct lifestyle and needs of our customers. Our design process is highly tailored, enabling us to craft spaces that are not only functional but also closely aligned with our clients' daily lives. From the floor plan to the finishes, every detail is thoughtfully designed to improve comfort, practicality, and visual appeal.",
+      },
+      {
+        title:
+          "Modern Living Technologies: Seamless Integration for a Smart Home",
+        description:
+          "We believe that comfort in the modern world is closely tied to technology. Our homes are equipped with the latest advancements in home automation and climate control, offering residents the ability to manage their living environment with ease. Whether through a simple touch or a voice command, our integrated systems ensure that every aspect of your home is attuned to your preferences, enhancing your daily comfort and convenience.",
+      },
+    ],
+    image: "/images/about-2.png",
+    imageDesktop: "/images/about-2-desktop.png",
+    imageHeightMobile: 338,
+    imageHeightDesktop: 704,
+  },
+  {
+    id: 3,
+    title: {
+      main: "Innovation",
+      sub: "Pioneering the Future of Construction",
+    },
+    value: [
+      {
+        title:
+          "Cutting-Edge CFS Technology: The Backbone of Modern Construction",
+        description:
+          "Innovation is the cornerstone of our construction philosophy. Cold-Formed Steel (CFS) technology represents a significant advancement in the building industry, offering a lightweight yet robust alternative to traditional materials. This technology allows for greater design flexibility, enabling us to create structures that are not only resilient but also adaptable to a wide range of architectural styles and environmental conditions.",
+      },
+      {
+        title:
+          "Continuous Research and Development: Staying Ahead of the Curve",
+        description:
+          "Our committed research and development team continuously investigates new techniques and technologies, ensuring that each project we handle stays at the forefront of innovation. This focus on R&D guarantees our clients receive the most advanced solutions, specifically designed to address the unique requirements of contemporary living.",
+      },
+    ],
+    image: "/images/about-3.png",
+    imageDesktop: "/images/about-3-desktop.png",
+    imageHeightMobile: 306,
+    imageHeightDesktop: 692,
+  },
+];
+
+const journeyData = [
+  {
+    id: 1,
+    title: "Discovering Your Vision: Let’s Get to Know Each Other",
+    description:
+      "Designing an establishment is a highly personal experience, and we believe it begins with grasping your vision. In our first consultation, we’ll delve into the inspiration behind your decision for wooden housing and discuss how our values resonate with your goals. This conversation is crucial for fostering a connection, ensuring the end result perfectly captures your dream.",
+  },
+  {
+    id: 2,
+    title: "Requesting a Free, Detailed Quote",
+    description:
+      "Once we have a full understanding of your project, we will offer a detailed, obligation-free quote. This thorough proposal will specify the costs, timelines, and technologies required to turn your vision into reality, providing you with a clear understanding of what lies ahead as we progress.",
+  },
+  {
+    id: 3,
+    title: "Commencing Construction: Bringing Your Dream to Life",
+    description:
+      "We emphasize on transparency and teamwork. During every stage of the project, from foundation to completion, you’ll stay informed and engaged, letting you enjoy watching your dream establishment come to life. We manage all elements of the project, providing a stress-free experience where you can rely on our expertise and professionalism.",
+  },
+  {
+    id: 4,
+    title: "Delivery and Ongoing Support: A Commitment to Excellence",
+    description:
+      "Our commitment to you continues even after we are done with the assembly. We uphold the quality of our work by providing a 3 years warranty. We also guarantee that any adjustments or concerns are swiftly resolved, ensuring you can enjoy your new home with total peace of mind.",
+  },
+];
 
 export default function AboutUs() {
+  const isMobile = useIsMobile();
+
   return (
     <div className='w-full bg-white'>
-      <div
-        style={{
-          background:
-            "linear-gradient(0deg, rgba(38, 33, 41, 0.8), rgba(38, 33, 41, 0.8)), url(/images/about-bg.jpeg)",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-        className='h-[209px] w-full'
-      >
-        <div className='mt-1.5 inline-flex items-center justify-start gap-1.5 pl-[31px]'>
-          <p className='text-center text-[10px] font-normal leading-[18.67px] text-white xl:text-[14px]'>
-            Home
-          </p>
-          <FontAwesomeIcon
-            icon={faAngleRight}
-            color='#D75337'
-            className='text-[5px] xl:text-[8px]'
-          />
-          <p className='text-[10px] font-semibold leading-[18.67px] text-white xl:text-[14px]'>
-            About Us
-          </p>
-        </div>
-        <div className='mt-[43px] inline-flex h-full w-full flex-col items-center gap-[5px]'>
-          <div className='inline-flex items-center justify-center self-stretch'>
-            <div className='text-center'>
-              <span className='text-[22px] font-semibold leading-[30.84px] text-white'>
-                About{" "}
-              </span>
-              <span className='text-[22px] font-semibold leading-[30.84px] text-[#ec6346]'>
-                Us
-              </span>
-            </div>
-          </div>
-          <div className='w-[282.89px] text-center text-xs font-light leading-[17.93px] text-white'>
-            Lorem ipsum dolor sit amet. Ut voluptas placeat qui dicta iure qui
-            odio laborum
-          </div>
-        </div>
-      </div>
+      <Banner />
+      <Mission />
 
-      <div className='w-full bg-neutral-50 px-[26px] py-[33px]'>
-        <div className='inline-flex flex-col items-start justify-start gap-[25px]'>
-          <div className='flex flex-col items-start justify-start self-stretch rounded-[15px] bg-white px-[25px] py-5 shadow'>
-            <div className='inline-flex items-center justify-start gap-[11.45px]'>
-              <MissionIcon />
-              <div className='text-lg font-semibold leading-[42px] text-[#352e39]'>
-                Our Mission
-              </div>
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#585858]'>
-              At our core, we are deeply committed to revolutionizing the
-              building industry by seamlessly combining sustainability,
-              innovation, and comfort. We are motivated by the belief that the
-              future of construction should focus on both the residents
-              well-being and the health of our planet.
-              <br />
-              <br /> Our aim is to transform living spaces by going beyond the
-              constraints of conventional materials such as bricks and concrete.
-              Today wooden houses are more innovative and advanced technologies
-              and eco-friendly practices that improve both quality of life and
-              environmental care.
-            </div>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch rounded-[15px] bg-white px-[25px] py-5 shadow'>
-            <div className='inline-flex items-center justify-start gap-[11.45px]'>
-              <MissionIcon />
-              <div className='text-lg font-semibold leading-[42px] text-[#352e39]'>
-                Our Vision
-              </div>
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#585858]'>
-              Our vision is to drive a transformation in the construction
-              industry, where sustainability and innovation are not merely
-              aspirations but essential elements of each project we complete. We
-              foresee a future where homes are more than buildings - they are
-              vibrant ecosystems that support their residents while reducing
-              their environmental impact.
-              <br />
-              <br />
-              By promoting sustainable practices and cutting-edge technologies,
-              we strive to design living spaces that coexist in harmony with
-              nature, providing unmatched comfort and contemporary style.
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='h-[65px] w-full bg-[#f2f2f2]'>
-        <div className='inline-flex h-full w-full items-center justify-center gap-[15.28px]'>
+      <div className='h-[65px] w-full bg-[#f2f2f2] xl:h-[152px]'>
+        <div className='inline-flex h-full w-full items-center justify-center gap-[15.28px] xl:gap-[39px]'>
           <div>
-            <span className='text-base font-medium leading-normal text-[#51281f]'>
+            <span className='text-base font-medium leading-normal text-[#51281f] xl:text-[40px] xl:leading-[62px]'>
               SUSTAINIBILITY
             </span>
-            <span className='text-base font-black leading-normal text-[#d75337]'>
+            <span className='text-base font-black leading-normal text-[#d75337] xl:text-[40px] xl:leading-[62px]'>
               .
             </span>
           </div>
           <div>
-            <span className='text-base font-medium leading-normal text-[#51281f]'>
+            <span className='text-base font-medium leading-normal text-[#51281f] xl:text-[40px] xl:leading-[62px]'>
               COMFORT
             </span>
-            <span className='text-base font-black leading-normal text-[#d75337]'>
+            <span className='text-base font-black leading-normal text-[#d75337] xl:text-[40px] xl:leading-[62px]'>
               .
             </span>
           </div>
           <div>
-            <span className='text-base font-medium leading-normal text-[#51281f]'>
+            <span className='text-base font-medium leading-normal text-[#51281f] xl:text-[40px] xl:leading-[62px]'>
               INNOVATION
             </span>
-            <span className='text-base font-black leading-normal text-[#d75337]'>
+            <span className='text-base font-black leading-normal text-[#d75337] xl:text-[40px] xl:leading-[62px]'>
               .
             </span>
           </div>
         </div>
       </div>
-      <div className='relative h-[325px] w-full'>
-        <Image src={"/images/about-1.png"} alt='' fill />
-      </div>
-
-      <div className='relative inline-flex flex-col items-start justify-start gap-3 px-[34px] py-10'>
-        <div className='absolute top-0 text-[67.17px] font-semibold leading-[115.45px] text-[#f3f3f3]'>
-          01
-        </div>
-        <div className='z-10 self-stretch'>
-          <span className='text-base font-medium leading-[20.86px] text-[#d75337]'>
-            Sustainability:
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#352e39]'>
-            {" "}
-            Building a{" "}
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#2e392e]'>
-            Greener
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#352e39]'>
-            {" "}
-            Future
-          </span>
-        </div>
-        <div className='z-10 flex flex-col items-start justify-center gap-[10.43px]'>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              1. Recyclable Materials for a Circular Economy
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              We are committed to using materials that contribute to a circular
-              economy, where nothing is wasted, and everything has a purpose.
-              Cold-Formed Steel (CFS), the backbone of our construction, is 100%
-              recyclable, allowing us to reduce waste and promote a sustainable
-              life cycle. This approach not only lowers the environmental impact
-              but also ensures that our buildings contribute to a healthier
-              planet for future generations.
-            </div>
+      {data?.map((item, index) => (
+        <div
+          key={item.id}
+          className={cn("flex flex-col xl:gap-[127px] xl:pt-[131px]", {
+            "xl:mr-[67px] xl:flex-row": index % 2 === 0,
+            "xl:ml-[123px] xl:flex-row-reverse": index % 2 === 1,
+          })}
+        >
+          <div
+            className={cn(`relative w-full max-w-[929px]`)}
+            style={{
+              height: isMobile
+                ? `${item.imageHeightMobile}px`
+                : `${item.imageHeightDesktop}px`,
+            }}
+          >
+            <Image
+              src={isMobile ? item.image : item.imageDesktop}
+              alt=''
+              fill
+            />
           </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              2. Energy Efficiency: Achieving NZEB Standards
+          <div className='relative inline-flex flex-col items-start justify-start gap-3 px-[34px] py-10 xl:justify-center xl:p-0'>
+            <div
+              className={cn(
+                "absolute top-0 text-[67.17px] font-semibold leading-[115.45px] text-[#f3f3f3] xl:-left-[100px] xl:text-[128px] xl:leading-[221px]",
+                {
+                  "xl:top-[60px]": index % 2 === 1,
+                  "xl:top-[117px]": index % 2 === 0,
+                }
+              )}
+            >
+              0{index + 1}
             </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              Our dedication to sustainability is reflected in our design
-              philosophy, where energy efficiency is paramount. We construct
-              buildings that meet and exceed the Near Zero Energy Building
-              (NZEB) standards, achieving energy class A4. Through the
-              integration of intelligent architectural design and the latest in
-              energy-saving technologies, we significantly reduce the energy
-              consumption of our homes, making them not only cost-effective but
-              also environmentally responsible.
-              <br />
+            <div className='z-10 self-stretch'>
+              <span className='text-base font-medium leading-[20.86px] text-[#d75337] xl:text-[28px] xl:leading-10'>
+                {item.title.main}: {"  "}
+              </span>
+              <span className='text-base font-medium leading-[20.86px] text-[#352e39] xl:text-[28px] xl:leading-10'>
+                {item.title.sub}
+              </span>
             </div>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              3. Reducing Carbon Footprint: A Commitment to Biodiversity
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              We actively seek out and implement eco-friendly construction
-              solutions that minimize carbon emissions. Our projects are
-              designed to have a low carbon footprint, contributing to the
-              global effort to combat climate change. By choosing materials and
-              methods that promote biodiversity and environmental health, we
-              ensure that our constructions are not only sustainable but also
-              respectful of the ecosystems they inhabit.
-              <br />
+            <div className='z-10 flex flex-col items-start justify-center gap-[10.43px] xl:gap-5'>
+              {item.value?.map((val, index) => (
+                <div
+                  key={val.title}
+                  className='flex flex-col items-start justify-start self-stretch'
+                >
+                  <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39] xl:text-[18px] xl:leading-10'>
+                    {index + 1}. {val.title}
+                  </div>
+                  <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a] xl:text-base'>
+                    {val.description}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-      </div>
-      <div className='relative h-[338px] w-full'>
-        <Image src={"/images/about-2.png"} alt='' fill />
-      </div>
-      <div className='relative inline-flex flex-col items-start justify-start gap-3 px-[34px] py-10'>
-        <div className='absolute top-0 text-[67.17px] font-semibold leading-[115.45px] text-[#f3f3f3]'>
-          02
-        </div>
-        <div className='z-10 self-stretch'>
-          <span className='text-base font-medium leading-[20.86px] text-[#d75337]'>
-            Sustainability:
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#352e39]'>
-            {" "}
-            Building a{" "}
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#2e392e]'>
-            Greener
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#352e39]'>
-            {" "}
-            Future
-          </span>
-        </div>
-        <div className='z-10 flex flex-col items-start justify-center gap-[10.43px]'>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              1. Recyclable Materials for a Circular Economy
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              We are committed to using materials that contribute to a circular
-              economy, where nothing is wasted, and everything has a purpose.
-              Cold-Formed Steel (CFS), the backbone of our construction, is 100%
-              recyclable, allowing us to reduce waste and promote a sustainable
-              life cycle. This approach not only lowers the environmental impact
-              but also ensures that our buildings contribute to a healthier
-              planet for future generations.
-            </div>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              2. Energy Efficiency: Achieving NZEB Standards
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              Our dedication to sustainability is reflected in our design
-              philosophy, where energy efficiency is paramount. We construct
-              buildings that meet and exceed the Near Zero Energy Building
-              (NZEB) standards, achieving energy class A4. Through the
-              integration of intelligent architectural design and the latest in
-              energy-saving technologies, we significantly reduce the energy
-              consumption of our homes, making them not only cost-effective but
-              also environmentally responsible.
-              <br />
-            </div>
-          </div>
-          <div className='flex h-[161px] flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              3. Reducing Carbon Footprint: A Commitment to Biodiversity
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              We actively seek out and implement eco-friendly construction
-              solutions that minimize carbon emissions. Our projects are
-              designed to have a low carbon footprint, contributing to the
-              global effort to combat climate change. By choosing materials and
-              methods that promote biodiversity and environmental health, we
-              ensure that our constructions are not only sustainable but also
-              respectful of the ecosystems they inhabit.
-              <br />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='relative h-[306px] w-full'>
-        <Image src={"/images/about-3.png"} alt='' fill />
-      </div>
-
-      <div className='relative inline-flex flex-col items-start justify-start gap-3 px-[34px] py-10'>
-        <div className='absolute top-0 text-[67.17px] font-semibold leading-[115.45px] text-[#f3f3f3]'>
-          03
-        </div>
-        <div className='z-10 self-stretch'>
-          <span className='text-base font-medium leading-[20.86px] text-[#d75337]'>
-            Sustainability:
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#352e39]'>
-            {" "}
-            Building a{" "}
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#2e392e]'>
-            Greener
-          </span>
-          <span className='text-base font-medium leading-[20.86px] text-[#352e39]'>
-            {" "}
-            Future
-          </span>
-        </div>
-        <div className='z-10 flex flex-col items-start justify-center gap-[10.43px]'>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              Recyclable Materials for a Circular Economy
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              We are committed to using materials that contribute to a circular
-              economy, where nothing is wasted, and everything has a purpose.
-              Cold-Formed Steel (CFS), the backbone of our construction, is 100%
-              recyclable, allowing us to reduce waste and promote a sustainable
-              life cycle. This approach not only lowers the environmental impact
-              but also ensures that our buildings contribute to a healthier
-              planet for future generations.
-            </div>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              2. Energy Efficiency: Achieving NZEB Standards
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              Our dedication to sustainability is reflected in our design
-              philosophy, where energy efficiency is paramount. We construct
-              buildings that meet and exceed the Near Zero Energy Building
-              (NZEB) standards, achieving energy class A4. Through the
-              integration of intelligent architectural design and the latest in
-              energy-saving technologies, we significantly reduce the energy
-              consumption of our homes, making them not only cost-effective but
-              also environmentally responsible.
-              <br />
-            </div>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <div className='self-stretch text-xs font-medium leading-[20.86px] text-[#352e39]'>
-              3. Reducing Carbon Footprint: A Commitment to Biodiversity
-            </div>
-            <div className='self-stretch text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              We actively seek out and implement eco-friendly construction
-              solutions that minimize carbon emissions. Our projects are
-              designed to have a low carbon footprint, contributing to the
-              global effort to combat climate change. By choosing materials and
-              methods that promote biodiversity and environmental health, we
-              ensure that our constructions are not only sustainable but also
-              respectful of the ecosystems they inhabit.
-              <br />
-            </div>
-          </div>
-        </div>
-      </div>
+      ))}
 
       <div className='inline-flex w-full flex-col items-start justify-start gap-5 bg-neutral-50 px-[26px] py-5'>
-        <div className='flex flex-col items-center justify-start gap-[5px] self-stretch'>
-          <div className='inline-flex items-center justify-center self-stretch'>
-            <Image
-              src={"/images/about-line-1.svg"}
-              alt=''
-              height={1}
-              width={50}
-              className='430:w-[73px]'
-            />
-            <div className='text-center text-xl font-semibold leading-[30.84px] text-[#352e39]'>
-              Your Journey with Us:
-              <br /> From Vision to Reality
+        <div className='mx-auto w-full max-w-[1280px]'>
+          <div className='mb-5 flex flex-col items-center justify-start gap-[5px] self-stretch xl:mb-10'>
+            <div className='inline-flex items-center justify-center self-stretch'>
+              <Image
+                src={
+                  isMobile
+                    ? "/images/about-line-1.svg"
+                    : "/images/about-line-1-desktop.svg"
+                }
+                alt=''
+                height={1}
+                width={50}
+                className='430:w-[73px] xl:w-[272px]'
+              />
+              <div className='text-center text-xl font-semibold leading-[30.84px] text-[#352e39] xl:text-[32px] xl:leading-[46px]'>
+                Your Journey with Us:
+                <br className='block xl:hidden' /> From Vision to Reality
+              </div>
+              <Image
+                src={
+                  isMobile
+                    ? "/images/about-line-2.svg"
+                    : "/images/about-line-2-desktop.png"
+                }
+                alt=''
+                height={1}
+                width={50}
+                className='430:w-[73px] xl:w-[272px]'
+              />
             </div>
-            <Image
-              src={"/images/about-line-2.svg"}
-              alt=''
-              height={1}
-              width={50}
-              className='430:w-[73px]'
-            />
+            <div className='text-center text-xs font-light leading-[17.93px] text-[#353535] xl:text-[18px] xl:leading-[27px]'>
+              Delivering the Finest Wooden Buildings, Crafted to Perfection
+            </div>
           </div>
-          <div className='text-center text-xs font-light leading-[17.93px] text-[#353535]'>
-            Lorem ipsum dolor sit amet. Ut voluptas placeat qui dicta iure qui
-            odio laborum
-          </div>
-        </div>
-        <div className='flex flex-col items-start justify-start gap-[15px] self-stretch'>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <h4 className='mb-2 w-full text-xs font-medium text-[#352e39]'>
-              1. Discovering Your Vision: Let’s Get to Know Each Other
-            </h4>
-            <p className='w-full text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              Building a home is a deeply personal journey, and we believe it
-              starts with understanding your vision. During our initial
-              consultation, we’ll explore what inspired you to choose a wooden
-              house, and discuss how our values align with your aspirations.
-              This dialogue is essential for creating a synergy between us,
-              ensuring that the final product is a true reflection of your
-              dream.
-            </p>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <h4 className='mb-2 w-full text-xs font-medium text-[#352e39]'>
-              2. Requesting a Free, Detailed Quote
-            </h4>
-            <p className='w-full text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              Once we have a clear understanding of your project, we will
-              provide a comprehensive, obligation-free quote. This detailed
-              proposal will outline the costs, timeframes, and technologies
-              involved in bringing your vision to life, giving you a clear
-              picture of what to expect as we move forward.
-            </p>
-          </div>
-          <div className='flex flex-col items-start justify-start self-stretch'>
-            <h4 className='mb-2 w-full text-xs font-medium text-[#352e39]'>
-              3. Commencing Construction: Bringing Your Dream to Life
-            </h4>
-            <p className='w-full text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              When you’re ready to proceed, we’ll begin the construction process
-              with a focus on transparency and collaboration. Throughout every
-              phase of the project, from foundation to finish, you’ll be kept
-              informed and involved, allowing you to enjoy the experience of
-              seeing your dream home take shape. We handle all aspects of the
-              project, ensuring a stress-free experience where you can trust our
-              expertise and professionalism.
-            </p>
-          </div>
-          <div className='flex h-[145px] flex-col items-start justify-start self-stretch'>
-            <h4 className='mb-2 w-full text-xs font-medium text-[#352e39]'>
-              4. Delivery and Ongoing Support: A Commitment to Excellence
-            </h4>
-            <p className='w-full text-[11px] font-light leading-tight text-[#5a5a5a]'>
-              Our commitment to you doesn’t end when we hand over the keys. We
-              stand by the quality of our work, offering two post-sales
-              assistance visits per year for the first two years following the
-              completion of your home. This ensures that any adjustments or
-              issues are promptly addressed, allowing you to enjoy your new home
-              with complete peace of mind.
-            </p>
+          <div className='flex flex-col items-start justify-start gap-[15px] self-stretch'>
+            {journeyData?.map((item, index) => (
+              <div
+                key={item.id}
+                className='flex flex-col items-start justify-start self-stretch'
+              >
+                <h4 className='w-full text-xs font-medium leading-[25px] text-[#352e39] xl:text-[18px] xl:leading-10'>
+                  {index + 1}. {item.title}
+                </h4>
+                <p className='w-full text-[11px] font-light leading-tight text-[#5a5a5a] xl:text-base'>
+                  {item.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

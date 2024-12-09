@@ -9,12 +9,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { RightSidebar } from "../RightSidebar";
+import { cn } from "@/app/shared/utils";
+import { usePathname } from "next/navigation";
 
 function Header() {
   const [categoryList, setCategoryList] = useState<CategoryType[]>();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenDrown, setIsOpenDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const pathname = usePathname();
 
   const toggleDropdown = () => {
     setIsOpenDropdown(!isOpen);
@@ -79,7 +82,12 @@ function Header() {
           <div className='ml-[144px] hidden gap-[38px] xl:flex'>
             <Link
               href={"/"}
-              className='inline-flex cursor-pointer items-center justify-center gap-2.5 border-b-2 border-[#d75438]'
+              className={cn(
+                "inline-flex cursor-pointer items-center justify-center gap-2.5 border-b-2 border-transparent",
+                {
+                  "border-[#d75438]": pathname === "/",
+                }
+              )}
             >
               <p className='text-lg font-medium text-[#1e1e21]'>Home</p>
             </Link>
@@ -127,7 +135,12 @@ function Header() {
             <div className='inline-flex cursor-pointer text-lg font-normal text-[#1e1e21]'>
               <Link
                 href={LIST_ROUTER.ABOUT_US}
-                className='text-lg font-normal text-[#1e1e21]'
+                className={cn(
+                  "border-b-2 border-transparent text-lg font-normal text-[#1e1e21]",
+                  {
+                    "border-[#d75438]": pathname === LIST_ROUTER.ABOUT_US,
+                  }
+                )}
               >
                 About Us
               </Link>
